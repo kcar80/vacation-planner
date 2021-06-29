@@ -13,8 +13,6 @@ create table location (
 -- create vacation
 create table vacation (
 	vacation_id int primary key auto_increment,
-	start_date date not null,
-	end_date date not null,
 	description varchar(250) not null,
 	leasure_level int not null,
 	location_id int not null,
@@ -63,6 +61,25 @@ create table vacation_user (
 	constraint uq_vacation_user_identifier_vacation_id
         unique (identifier, vacation_id)
 );
+
+-- create vacation_stops
+create table vacation_stops (
+	vacation_id int not null,
+    location_id int not null,
+    start_date date not null,
+    end_date date not null,
+    identifier varchar(50) not null,
+    constraint pk_vacation_stops
+        primary key (vacation_id, location_id),
+	constraint fk_vacation_stops_location_id
+        foreign key (location_id)
+        references location(location_id),
+	constraint fk_vacation_stops_vacation_id
+        foreign key (vacation_id)
+        references vacation(vacation_id),
+	constraint uq_vacation_stops_identifier_vacation_id
+        unique (identifier, vacation_id)
+);
 	
 use vacation_app_test;
 drop procedure if exists set_known_good_state;
@@ -72,6 +89,8 @@ create procedure set_known_good_state()
 begin
 	delete from vacation_user;
 	alter table vacation_user auto_increment = 1;
+    delete from vacation_stops;
+    alter table vacation_stops auto_increment = 1;
     delete from comment;
 	alter table comment auto_increment = 1;
 	delete from vacation;
@@ -104,14 +123,14 @@ begin
 		
 	-- vacation inserts
 	insert into vacation
-		(vacation_id, start_date, end_date, description, leasure_level, location_id)
+		(vacation_id, description, leasure_level, location_id)
 	values
-		(1, '2021-07-04', '2021-07-11', 'A trip to the capital of MN', 1, 1),
-		(2, '2021-10-31', '2021-11-04', 'Halloween Fun Trip', 1, 2),
-		(3, '2021-11-20', '2021-11-29', 'Disney World Tour Trip', 2, 3),
-		(4, '2022-01-04', '2022-01-11', 'New Years Trip', 2, 4),
-		(5, '2021-07-04', '2021-07-11', 'Hollywood Trip', 3, 5),
-		(6, '2021-07-04', '2021-07-11', 'Beaches and Sun Trip', 3, 6);
+		(1, 'A trip to the capital of MN', 1, 1),
+		(2, 'Halloween Fun Trip', 1, 2),
+		(3, 'Disney World Tour Trip', 2, 3),
+		(4, 'New Years Trip', 2, 4),
+		(5, 'Hollywood Trip', 3, 5),
+		(6, 'Beaches and Sun Trip', 3, 6);
 		
 	-- comment inserts
 	insert into comment
