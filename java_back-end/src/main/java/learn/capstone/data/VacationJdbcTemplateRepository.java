@@ -1,6 +1,9 @@
 package learn.capstone.data;
 
 import learn.capstone.data.mappers.VacationMapper;
+import learn.capstone.data.mappers.VacationStopMapper;
+import learn.capstone.data.mappers.VacationUserMapper;
+import learn.capstone.models.User;
 import learn.capstone.models.Vacation;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -25,7 +28,7 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
     @Override
     public List<Vacation> findAll() {
         final String sql = "select vacation_id, `description`, "
-                +"leasure_level, location_id from vacation limit 1000;";
+                +"leasure_level from vacation limit 1000;";
         return jdbcTemplate.query(sql, new VacationMapper());
     }
 
@@ -33,10 +36,14 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
     @Transactional
     public Vacation findById(int vacationId) {
         final String sql = "select vacation_id, `description`, "
-                +"leasure_level, location_id from vacation where vacation_id = ?;";
+                +"leasure_level from vacation where vacation_id = ?;";
         Vacation vacation = jdbcTemplate.query(sql, new VacationMapper(), vacationId).stream()
                 .findFirst().orElse(null);
 
+        if(vacation !=null){
+            addUsers(vacation);
+
+        }
 
         return vacation;
     }
@@ -44,14 +51,13 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
     @Override
     public Vacation add(Vacation vacation) {
         final String sql = "insert into vacation (vacation_id, `description`, "
-                +"leasure_level, location_id) values (?,?,?,?);";
+                +"leasure_level) values (?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, vacation.getDescription());
             ps.setInt(2, vacation.getLeisureLevel());
-            ps.setInt(3,vacation.getLocationId());
             return ps;
         }, keyHolder);
         if (rowsAffected <= 0){
@@ -66,14 +72,14 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
         final String sql = "update vacation set "
                 +"vacation_id =?, "
                 +"`description` =?, "
-                +"leasure_level =?, "
-                +"location_id =? "
+                +"leasure_level =? "
+
                 + "where vacation_id= ?;";
 
         return jdbcTemplate.update(sql,
                 vacation.getDescription(),
                 vacation.getLeisureLevel(),
-                vacation.getLocationId(),
+
                 vacation.getVacationId()) >0;
 
     }
@@ -81,7 +87,33 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
     @Override
     @Transactional
     public boolean deleteById(int vacationId) {
+        jdbcTemplate.update("delete from vacation_user where vacation_id =?", vacationId);
+        jdbcTemplate.update("delete from vacation_stops where vacation_id =?", vacationId);
         return jdbcTemplate.update("delete from vacation where vacation_id =?;", vacationId) >0;
 
     }
+
+    private void addUsers(Vacation vacation){
+        final String sql = "select vu.vacation_id, vu.user_id, vu.identifier, "
+                + "u.first_name, u.last_name, u.user_name, u.password, u.user_type "
+                + "from vacation_user vu "
+                + "inner join user u on vu.user_id = u.user_id "
+               + "where vu.vacation_id = ?;";
+
+        var vacationUsers = jdbcTemplate.query(sql, new VacationUserMapper(), vacation.getVacationId());
+        vacation.setUsers(vacationUsers);
+    }
+
+    private void addLocations(Vacation vacation){
+        final String sql = "select vs.vacation_id, vs.location_id, vs.start_date, "
+                +" vs.end_date, vs.identifier, l.description "
+                + "from vacation_stops vs "
+                + "inner join location l on vs.location_id = l.location_id "
+                + "where vs.vacation_id = ?;";
+
+        var vacationStops = jdbcTemplate.query(sql, new VacationStopMapper(), vacation.getVacationId());
+        vacation.setLocations(vacationStops);
+    }
+
+
 }

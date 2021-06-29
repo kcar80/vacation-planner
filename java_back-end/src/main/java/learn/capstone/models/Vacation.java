@@ -1,7 +1,6 @@
 package learn.capstone.models;
 
 import javax.validation.constraints.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +30,7 @@ public class Vacation {
         this.leisureLevel = leisureLevel;
     }
 
-    public int getLocationId() {
-        return locationId;
-    }
 
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
 
     public List<VacationUser> getUsers() {
         return users;
@@ -58,9 +51,16 @@ public class Vacation {
     @Max(value =3)
     private int leisureLevel;
 
-    @NotNull
-    private int locationId;
     private List<VacationUser> users = new ArrayList<>();
+    private List<VacationStops> locations = new ArrayList<>();
+
+    public List<VacationStops> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<VacationStops> locations) {
+        this.locations = locations;
+    }
 
     public Vacation(){
 

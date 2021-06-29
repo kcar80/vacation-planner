@@ -15,7 +15,7 @@ public class VacationMapper implements RowMapper<Vacation> {
         vacation.setVacationId(resultSet.getInt("vacation_id"));
         vacation.setDescription(resultSet.getString("description"));
         vacation.setLeisureLevel(resultSet.getInt("leasure_level"));
-        vacation.setLocationId(resultSet.getInt("location_id"));
+
         return vacation;
 
     }

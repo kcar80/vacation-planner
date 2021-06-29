@@ -33,12 +33,15 @@ class VacationJdbcTemplateRepositoryTest {
         assertTrue(vacations.size() == 6);
     }
 
+    @Test
+    
+
 
     private Vacation makeVacation(){
         Vacation vacation = new Vacation();
         vacation.setDescription("test");
         vacation.setLeisureLevel(2);
-        vacation.setLocationId(4);
+
         return vacation;
     }
 
