@@ -36,8 +36,6 @@ class VacationJdbcTemplateRepositoryTest {
 
     private Vacation makeVacation(){
         Vacation vacation = new Vacation();
-        vacation.setStartDate(LocalDate.of(2020, 5,5));
-        vacation.setEndDate(LocalDate.of(2020,5,10));
         vacation.setDescription("test");
         vacation.setLeisureLevel(2);
         vacation.setLocationId(4);

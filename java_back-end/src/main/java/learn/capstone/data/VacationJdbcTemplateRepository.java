@@ -24,16 +24,16 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
 
     @Override
     public List<Vacation> findAll() {
-        final String sql = "select vacation_id, start_date, end_date, `description`, "
-                +"leisure_level, location_id from vacation limit 1000;";
+        final String sql = "select vacation_id, `description`, "
+                +"leasure_level, location_id from vacation limit 1000;";
         return jdbcTemplate.query(sql, new VacationMapper());
     }
 
     @Override
     @Transactional
     public Vacation findById(int vacationId) {
-        final String sql = "select vacation_id, start_date, end_date, `description`, "
-                +"leisure_level, location_id from vacation where vacation_id = ?;";
+        final String sql = "select vacation_id, `description`, "
+                +"leasure_level, location_id from vacation where vacation_id = ?;";
         Vacation vacation = jdbcTemplate.query(sql, new VacationMapper(), vacationId).stream()
                 .findFirst().orElse(null);
 
@@ -43,17 +43,15 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
 
     @Override
     public Vacation add(Vacation vacation) {
-        final String sql = "insert into vacation (vacation_id, start_date, end_date, `description`, "
-                +"leisure_level, location_id) values (?,?,?,?,?,?);";
+        final String sql = "insert into vacation (vacation_id, `description`, "
+                +"leasure_level, location_id) values (?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setDate(1, Date.valueOf(vacation.getStartDate()));
-            ps.setDate(2, Date.valueOf(vacation.getEndDate()));
-            ps.setString(3, vacation.getDescription());
-            ps.setInt(4, vacation.getLeisureLevel());
-            ps.setInt(5,vacation.getLocationId());
+            ps.setString(1, vacation.getDescription());
+            ps.setInt(2, vacation.getLeisureLevel());
+            ps.setInt(3,vacation.getLocationId());
             return ps;
         }, keyHolder);
         if (rowsAffected <= 0){
@@ -67,16 +65,12 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
     public boolean update(Vacation vacation) {
         final String sql = "update vacation set "
                 +"vacation_id =?, "
-                +"start_date =?, "
-                +"end_date =?, "
                 +"`description` =?, "
-                +"leisure_level =?, "
+                +"leasure_level =?, "
                 +"location_id =? "
                 + "where vacation_id= ?;";
 
         return jdbcTemplate.update(sql,
-                vacation.getStartDate(),
-                vacation.getEndDate(),
                 vacation.getDescription(),
                 vacation.getLeisureLevel(),
                 vacation.getLocationId(),

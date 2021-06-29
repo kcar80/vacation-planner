@@ -14,21 +14,6 @@ public class Vacation {
         this.vacationId = vacationId;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
 
     public String getDescription() {
         return description;
@@ -64,12 +49,6 @@ public class Vacation {
 
     @NotNull
     private int vacationId;
-
-    @NotNull
-    private LocalDate startDate;
-
-    @NotNull
-    private LocalDate endDate;
 
     @NotBlank
     @Size(max = 250)
