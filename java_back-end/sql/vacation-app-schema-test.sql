@@ -93,7 +93,7 @@ begin
 	alter vacation_user auto_increment = 1;
 	
 	-- inserts
-	use vacation_app
+	use vacation_app;
 
 	-- user_type inserts
 	insert into user_type

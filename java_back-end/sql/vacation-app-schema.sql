@@ -74,7 +74,7 @@ create table vacation_user (
 );
 
 -- inserts
-use vacation_app
+use vacation_app;
 
 -- user_type inserts
 insert into user_type
