@@ -80,13 +80,9 @@ begin
 	alter table comment auto_increment = 1;
 	delete from vacation_user;
 	alter table vacation_user auto_increment = 1;
-<<<<<<< HEAD
-=======
 	
 	-- inserts
 	
->>>>>>> 8fcd42e1b1d50cfcb8565b9a23e7a1fa5f3f1bd2
-		
 	-- location inserts
 	insert into location
 		(location_id, description)
