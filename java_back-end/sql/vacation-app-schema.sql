@@ -30,7 +30,7 @@ create table user (
 	last_name varchar(50) not null,
 	user_name varchar(50) not null,
 	password varchar(50) not null,
-	user_type tinyint not null,
+	user_type tinyint not null
 );
 
 -- create comment
@@ -59,7 +59,7 @@ create table vacation_user (
         references user(user_id),
 	constraint fk_vacation_user_vacation_id
         foreign key (vacation_id)
-        references vacation(vacation_id)
+        references vacation(vacation_id),
 	constraint uq_vacation_user_identifier_vacation_id
         unique (identifier, vacation_id)
 );
@@ -94,7 +94,7 @@ values
 	(2, '2021-10-31', '2021-11-04', 'Halloween Fun Trip', 1, 2),
 	(3, '2021-11-20', '2021-11-29', 'Disney World Tour Trip', 2, 3),
 	(4, '2022-01-04', '2022-01-11', 'New Years Trip', 2, 4),
-	(5, '2021-07-04', '2021-07-11', 'Hollywood Trip', 3, 5);
+	(5, '2021-07-04', '2021-07-11', 'Hollywood Trip', 3, 5),
 	(6, '2021-07-04', '2021-07-11', 'Beaches and Sun Trip', 3, 6);
 	
 -- comment inserts
