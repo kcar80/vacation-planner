@@ -23,12 +23,6 @@ create table vacation (
         references location(location_id)
 );
 
--- create user_type
-create table user_type (
-	user_type_id int primary key auto_increment,
-	user_type_type varchar(50) not null
-);
-
 -- create user
 create table user (
 	user_id int primary key auto_increment,
@@ -36,10 +30,7 @@ create table user (
 	last_name varchar(50) not null,
 	user_name varchar(50) not null,
 	password varchar(50) not null,
-	user_type_id tinyint not null,
-	constraint fk_user_user_type_id
-        foreign key (user_type_id)
-        references user_type(user_type_id)
+	user_type tinyint not null,
 );
 
 -- create comment
@@ -75,13 +66,6 @@ create table vacation_user (
 
 -- inserts
 use vacation_app;
-
--- user_type inserts
-insert into user_type
-	(user_type_id, user_type_type)
-values
-	(0, 'Admin'),
-	(1, 'User');
 	
 -- location inserts
 insert into location
@@ -96,7 +80,7 @@ values
 
 -- user inserts
 insert into user
-	(user_id, first_name, last_name, user_name, password, user_type_id)
+	(user_id, first_name, last_name, user_name, password, user_type)
 values
 	(1, 'Robert', 'Entenmann', 'robb@gmail.com', 'robert123', 1),
 	(2, 'Killian', 'Carlsen-Phelan', 'killian@gmail.com', 'killian123', 0),
