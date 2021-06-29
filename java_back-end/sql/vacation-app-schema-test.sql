@@ -70,16 +70,16 @@ drop procedure if exists set_known_good_state;
 delimiter //
 create procedure set_known_good_state()
 begin
-	delete from location;
-	alter table location auto_increment = 1;
-	delete from vacation;
-	alter table vacation auto_increment = 1;
-	delete from user;
-	alter table user auto_increment = 1;
-	delete from comment;
-	alter table comment auto_increment = 1;
 	delete from vacation_user;
 	alter table vacation_user auto_increment = 1;
+    delete from comment;
+	alter table comment auto_increment = 1;
+	delete from vacation;
+	alter table vacation auto_increment = 1;
+    delete from location;
+	alter table location auto_increment = 1;
+	delete from user;
+	alter table user auto_increment = 1;
 	
 	-- inserts
 	
