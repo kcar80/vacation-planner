@@ -10,26 +10,17 @@ create table location (
 	description varchar(50) not null
 );
 
--- create leasure_level
-create table leasure_level (
-	leasure_level_id int primary key auto_increment,
-	description varchar(50)
-);
-
 -- create vacation
 create table vacation (
 	vacation_id int primary key auto_increment,
 	start_date date not null,
 	end_date date not null,
 	description varchar(250) not null,
-	leasure_level_id int not null,
+	leasure_level int not null,
 	location_id int not null,
 	constraint fk_vacation_location_id
         foreign key (location_id)
-        references location(location_id),
-	constraint fk_vacation_leasure_level_id
-        foreign key (leasure_level_id)
-        references location(leasure_level_id)
+        references location(location_id)
 );
 
 -- create user_type
@@ -102,14 +93,6 @@ values
 	(4, 'New York, NY'),
 	(5, 'Los Angeles, CA'),
 	(6, 'Honolulu, HI');
-	
--- leasure_level inserts
-insert into leasure_level
-	(leasure_level_id, description)
-values
-	(1, 'Minimal'),
-	(2, 'Moderate'),
-	(3, 'Super');
 
 -- user inserts
 insert into user
@@ -121,7 +104,7 @@ values
 	
 -- vacation inserts
 insert into vacation
-	(vacation_id, start_date, end_date, description, leasure_level_id, location_id)
+	(vacation_id, start_date, end_date, description, leasure_level, location_id)
 values
 	(1, '2021-07-04', '2021-07-11', 'A trip to the capital of MN', 1, 1),
 	(2, '2021-10-31', '2021-11-04', 'Halloween Fun Trip', 1, 2),
