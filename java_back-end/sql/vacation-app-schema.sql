@@ -13,8 +13,6 @@ create table location (
 -- create vacation
 create table vacation (
 	vacation_id int primary key auto_increment,
-	start_date date not null,
-	end_date date not null,
 	description varchar(250) not null,
 	leasure_level int not null,
 	location_id int not null,
@@ -64,6 +62,25 @@ create table vacation_user (
         unique (identifier, vacation_id)
 );
 
+-- create vacation_stops
+create table vacation_stops (
+	vacation_id int not null,
+    location_id int not null,
+    start_date date not null,
+    end_date date not null,
+    identifier varchar(50) not null,
+    constraint pk_vacation_stops
+        primary key (vacation_id, location_id),
+	constraint fk_vacation_stops_location_id
+        foreign key (location_id)
+        references location(location_id),
+	constraint fk_vacation_stops_vacation_id
+        foreign key (vacation_id)
+        references vacation(vacation_id),
+	constraint uq_vacation_stops_identifier_vacation_id
+        unique (identifier, vacation_id)
+);
+
 -- inserts
 use vacation_app;
 	
@@ -88,14 +105,14 @@ values
 	
 -- vacation inserts
 insert into vacation
-	(vacation_id, start_date, end_date, description, leasure_level, location_id)
+	(vacation_id, description, leasure_level, location_id)
 values
-	(1, '2021-07-04', '2021-07-11', 'A trip to the capital of MN', 1, 1),
-	(2, '2021-10-31', '2021-11-04', 'Halloween Fun Trip', 1, 2),
-	(3, '2021-11-20', '2021-11-29', 'Disney World Tour Trip', 2, 3),
-	(4, '2022-01-04', '2022-01-11', 'New Years Trip', 2, 4),
-	(5, '2021-07-04', '2021-07-11', 'Hollywood Trip', 3, 5),
-	(6, '2021-07-04', '2021-07-11', 'Beaches and Sun Trip', 3, 6);
+	(1, 'A trip to the capital of MN', 1, 1),
+	(2, 'Halloween Fun Trip', 1, 2),
+	(3, 'Disney World Tour Trip', 2, 3),
+	(4, 'New Years Trip', 2, 4),
+	(5, 'Hollywood Trip', 3, 5),
+	(6, 'Beaches and Sun Trip', 3, 6);
 	
 -- comment inserts
 insert into comment
@@ -116,3 +133,19 @@ from vacation
 inner join user
 where user.user_id in (1, 3)
 and vacation.vacation_id != 2;
+
+insert into vacation_stops
+	(vacation_id, location_id, start_date, end_date, identifier)
+values
+	(1, 1, '2021-07-04', '2021-07-11', concat(vacation_id, '-', location_id)),
+    (2, 2, '2021-08-04', '2021-08-11', concat(vacation_id, '-', location_id)),
+    (3, 3, '2021-09-04', '2021-09-11', concat(vacation_id, '-', location_id)),
+    (4, 4, '2021-10-04', '2021-10-11', concat(vacation_id, '-', location_id));
+    
+    
+    
+    
+    
+    
+    
+    
