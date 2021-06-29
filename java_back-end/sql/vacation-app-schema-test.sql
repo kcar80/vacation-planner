@@ -30,7 +30,7 @@ create table user (
 	last_name varchar(50) not null,
 	user_name varchar(50) not null,
 	password varchar(50) not null,
-	user_type tinyint not null,
+	user_type tinyint not null
 );
 
 -- create comment
@@ -59,7 +59,7 @@ create table vacation_user (
         references user(user_id),
 	constraint fk_vacation_user_vacation_id
         foreign key (vacation_id)
-        references vacation(vacation_id)
+        references vacation(vacation_id),
 	constraint uq_vacation_user_identifier_vacation_id
         unique (identifier, vacation_id)
 );
@@ -70,19 +70,16 @@ drop procedure if exists set_known_good_state;
 delimiter //
 create procedure set_known_good_state()
 begin
-	delete location;
+	delete from location;
 	alter table location auto_increment = 1;
-	delete vacation;
+	delete from vacation;
 	alter table vacation auto_increment = 1;
-	delete user;
-	alter user auto_increment = 1;
-	delete comment;
-	alter comment auto_increment = 1;
-	delete vacation_user;
-	alter vacation_user auto_increment = 1;
-	
-	-- inserts
-	use vacation_app;
+	delete from user;
+	alter table user auto_increment = 1;
+	delete from comment;
+	alter table comment auto_increment = 1;
+	delete from vacation_user;
+	alter table vacation_user auto_increment = 1;
 		
 	-- location inserts
 	insert into location
@@ -111,7 +108,7 @@ begin
 		(2, '2021-10-31', '2021-11-04', 'Halloween Fun Trip', 1, 2),
 		(3, '2021-11-20', '2021-11-29', 'Disney World Tour Trip', 2, 3),
 		(4, '2022-01-04', '2022-01-11', 'New Years Trip', 2, 4),
-		(5, '2021-07-04', '2021-07-11', 'Hollywood Trip', 3, 5);
+		(5, '2021-07-04', '2021-07-11', 'Hollywood Trip', 3, 5),
 		(6, '2021-07-04', '2021-07-11', 'Beaches and Sun Trip', 3, 6);
 		
 	-- comment inserts
@@ -124,15 +121,15 @@ begin
 
 	-- vacation_user inserts
 	insert into vacation_user
-		(vacation_id, user_id)
+		(vacation_id, user_id, identifier)
 	select
 		vacation.vacation_id,
 		user.user_id,
 		concat(vacation.vacation_id, '-', user.user_id)
 	from vacation
 	inner join user
-	where user.user_id not in (6, 8)
-	and vacation.vacation_id != 2;
+	where user.user_id in (1, 3)
+and vacation.vacation_id != 2;
 end //
 -- Change the statement terminator back to the original.
 delimiter ;

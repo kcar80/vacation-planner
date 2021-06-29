@@ -107,12 +107,12 @@ values
 
 -- vacation_user inserts
 insert into vacation_user
-	(vacation_id, user_id)
+	(vacation_id, user_id, identifier)
 select
 	vacation.vacation_id,
 	user.user_id,
 	concat(vacation.vacation_id, '-', user.user_id)
 from vacation
 inner join user
-where user.user_id not in (6, 8)
+where user.user_id in (1, 3)
 and vacation.vacation_id != 2;
