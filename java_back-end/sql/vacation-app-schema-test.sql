@@ -14,11 +14,7 @@ create table location (
 create table vacation (
 	vacation_id int primary key auto_increment,
 	description varchar(250) not null,
-	leasure_level int not null,
-	location_id int not null,
-	constraint fk_vacation_location_id
-        foreign key (location_id)
-        references location(location_id)
+	leasure_level int not null
 );
 
 -- create user
@@ -123,14 +119,14 @@ begin
 		
 	-- vacation inserts
 	insert into vacation
-		(vacation_id, description, leasure_level, location_id)
+		(vacation_id, description, leasure_level)
 	values
-		(1, 'A trip to the capital of MN', 1, 1),
-		(2, 'Halloween Fun Trip', 1, 2),
-		(3, 'Disney World Tour Trip', 2, 3),
-		(4, 'New Years Trip', 2, 4),
-		(5, 'Hollywood Trip', 3, 5),
-		(6, 'Beaches and Sun Trip', 3, 6);
+		(1, 'A trip to the capital of MN', 1),
+		(2, 'Halloween Fun Trip', 1),
+		(3, 'Disney World Tour Trip', 2),
+		(4, 'New Years Trip', 2),
+		(5, 'Hollywood Trip', 3),
+		(6, 'Beaches and Sun Trip', 3);
 		
 	-- comment inserts
 	insert into comment
