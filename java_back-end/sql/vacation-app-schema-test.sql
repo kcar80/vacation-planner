@@ -82,7 +82,7 @@ begin
 	alter table vacation_user auto_increment = 1;
 	
 	-- inserts
-	use vacation_app_test;
+	
 		
 	-- location inserts
 	insert into location
