@@ -65,6 +65,11 @@ public class Vacation {
     public Vacation(){
 
     }
+    public Vacation(int vacationId, String description, int leisureLevel){
+        this.vacationId=vacationId;
+        this.description=description;
+        this.leisureLevel=leisureLevel;
+    }
 
 
 

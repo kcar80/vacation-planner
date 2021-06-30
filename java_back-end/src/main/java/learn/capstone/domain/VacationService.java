@@ -18,9 +18,14 @@ public class VacationService {
     private final VacationRepository vacationRepository;
     private final VacationStopsRepository vacationStopsRepository;
 
+
+
+
+
     public VacationService(VacationRepository vacationRepository, VacationStopsRepository vacationStopsRepository) {
         this.vacationRepository = vacationRepository;
         this.vacationStopsRepository = vacationStopsRepository;
+
     }
 
     public List<Vacation> findAll(){

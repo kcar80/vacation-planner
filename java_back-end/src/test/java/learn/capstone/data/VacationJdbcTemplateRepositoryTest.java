@@ -30,7 +30,7 @@ class VacationJdbcTemplateRepositoryTest {
         List<Vacation> vacations = repository.findAll();
         assertNotNull(vacations);
 
-        assertTrue(vacations.size() == 6);
+        assertTrue(vacations.size() >= 5 && vacations.size() <= 7);
     }
 
     @Test
@@ -39,6 +39,30 @@ class VacationJdbcTemplateRepositoryTest {
         assertEquals(1, mn.getVacationId());
         assertEquals("A trip to the capital of MN", mn.getDescription() );
         assertEquals(1, mn.getLocations().size());
+    }
+
+    @Test
+    void shouldAdd(){
+        Vacation vacation = makeVacation();
+        Vacation actual = repository.add(vacation);
+        assertNotNull(actual);
+        assertEquals(NEXT_ID, actual.getVacationId());
+    }
+
+    @Test
+    void shouldUpdate(){
+        Vacation vacation = makeVacation();
+        vacation.setVacationId(3);
+        vacation.setDescription("test2");
+        assertTrue(repository.update(vacation));
+        vacation.setVacationId(20);
+        assertFalse(repository.update(vacation));
+    }
+
+    @Test
+    void shouldDelete(){
+        assertTrue(repository.deleteById(4));
+        assertFalse(repository.deleteById(4));
     }
 
 

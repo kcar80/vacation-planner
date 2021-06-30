@@ -19,16 +19,30 @@ public class VacationUserJdbcRepository implements VacationUserRepository{
         final String sql = "insert into vacation_user (vacation_id, user_id, identifier) values"
                 + "(?,?,?);";
 
-        return false;
+        return jdbcTemplate.update(sql,
+                vacationUser.getVacationId(),
+                vacationUser.getUser().getUserId(),
+                vacationUser.getIdentifier()) >0;
     }
 
     @Override
     public boolean update(VacationUser vacationUser) {
-        return false;
+
+        final String sql = "update vacation_user set "
+                +"identifier =? "
+                +"where vacation_id= ? and user_id =?;";
+        return jdbcTemplate.update(sql,
+                vacationUser.getIdentifier(),
+                vacationUser.getVacationId(),
+                vacationUser.getUser().getUserId())>0;
+
+
     }
 
     @Override
     public boolean deleteByKey(int vacationId, int userId) {
-        return false;
+        final String sql = "delete from vacation_user "
+                +"where vacation_id = ? and user_id= ?;";
+        return jdbcTemplate.update(sql, vacationId, userId) >0;
     }
 }
