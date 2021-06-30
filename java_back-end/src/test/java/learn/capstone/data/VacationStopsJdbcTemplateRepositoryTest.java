@@ -42,7 +42,7 @@ public class VacationStopsJdbcTemplateRepositoryTest {
     @Test
     void shouldUpdate() {
         VacationStops vacationStops = makeVacationStops();
-        vacationStops.setIdentifier("008"); // avoid duplicates
+        vacationStops.setIdentifier("107"); // avoid duplicates
         vacationStops.getLocation().setLocationId(1);
         assertTrue(repository.update(vacationStops));
 
@@ -67,7 +67,7 @@ public class VacationStopsJdbcTemplateRepositoryTest {
 
         vacationStops.setStartDate(LocalDate.of(2010, 6, 19));
         vacationStops.setEndDate(LocalDate.of(2010, 6, 19));
-        vacationStops.setIdentifier("007");
+        vacationStops.setIdentifier("1-7");
 
         return vacationStops;
     }
