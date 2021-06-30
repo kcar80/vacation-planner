@@ -2,20 +2,18 @@ package learn.capstone.models;
 
 public class VacationUser {
 
-    private int vacation_id;
-
+    private int vacationId;
 
     private String identifier;
 
-
     private User user;
 
-    public int getVacation_id() {
-        return vacation_id;
+    public int getVacationId() {
+        return vacationId;
     }
 
-    public void setVacation_id(int vacation_id) {
-        this.vacation_id = vacation_id;
+    public void setVacationId(int vacationId) {
+        this.vacationId = vacationId;
     }
 
     public String getIdentifier() {
