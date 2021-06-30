@@ -41,7 +41,7 @@ public class CommentController {
 
     @PutMapping("/{commentId}")
     public ResponseEntity<Object> update(@PathVariable int commentId, @RequestBody Comment comment) {
-        if (commentId != comment.getComment_id()) {
+        if (commentId != comment.getCommentId()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 

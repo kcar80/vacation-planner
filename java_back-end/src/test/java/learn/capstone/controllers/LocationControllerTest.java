@@ -140,7 +140,7 @@ public class LocationControllerTest {
         Result<Location> result = new Result<>();
         result.isSuccess();
 
-        when(service.deleteById(expected.getLocation_id())).thenReturn(true);
+        when(service.deleteById(expected.getLocationId())).thenReturn(true);
 
         ObjectMapper jsonMapper = new ObjectMapper();
         String jsonIn = jsonMapper.writeValueAsString(expected);
@@ -157,7 +157,7 @@ public class LocationControllerTest {
         Result<Location> result = new Result<>();
         result.addMessage("delete failed", ResultType.INVALID);
 
-        when(service.deleteById(expected.getLocation_id())).thenReturn(false);
+        when(service.deleteById(expected.getLocationId())).thenReturn(false);
 
         ObjectMapper jsonMapper = new ObjectMapper();
         String jsonIn = jsonMapper.writeValueAsString(expected);

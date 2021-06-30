@@ -30,7 +30,7 @@ class LocationServiceTest {
     @Test
     void shouldNotAddWhenInvalid() {
         Location location = makeLocation();
-        location.setLocation_id(0);
+        location.setLocationId(0);
         location.setDescription(null);
         Result<Location> result = service.add(location);
         assertEquals(ResultType.INVALID, result.getType());
@@ -40,7 +40,7 @@ class LocationServiceTest {
     void shouldAddWhenValid() {
         Location location = makeLocation();
         Location local = makeLocation();
-        local.setLocation_id(0);
+        local.setLocationId(0);
 
         when(repository.add(local)).thenReturn(location);
         Result<Location> result = service.add(local);
@@ -53,9 +53,9 @@ class LocationServiceTest {
     void shouldNotUpdateInvalid() {
         Location location = makeLocation();
         Location expected = makeLocation();
-        expected.setLocation_id(0);
+        expected.setLocationId(0);
         Location local = new Location();
-        local.setLocation_id(1);
+        local.setLocationId(1);
         local.setDescription(null);
 
         when(repository.add(expected)).thenReturn(location);
@@ -69,9 +69,9 @@ class LocationServiceTest {
     void shouldUpdateValid() {
         Location location = makeLocation();
         Location expected = makeLocation();
-        expected.setLocation_id(0);
+        expected.setLocationId(0);
         Location local = new Location();
-        local.setLocation_id(1);
+        local.setLocationId(1);
         local.setDescription("Updated Test");
 
         when(repository.add(expected)).thenReturn(location);
@@ -85,7 +85,7 @@ class LocationServiceTest {
     void shouldNotDelete() {
         Location location = makeLocation();
         Location expected = makeLocation();
-        expected.setLocation_id(0);
+        expected.setLocationId(0);
 
         when(repository.add(location)).thenReturn(expected);
 
@@ -98,7 +98,7 @@ class LocationServiceTest {
     void shouldDelete() {
         Location location = makeLocation();
         Location expected = makeLocation();
-        expected.setLocation_id(0);
+        expected.setLocationId(0);
 
         when(repository.add(location)).thenReturn(expected);
 
@@ -109,7 +109,7 @@ class LocationServiceTest {
 
     private Location makeLocation() {
         Location location = new Location();
-        location.setLocation_id(1);
+        location.setLocationId(1);
         location.setDescription("Test Location");
         return location;
     }

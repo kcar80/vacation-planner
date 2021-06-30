@@ -51,8 +51,8 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
 
     @Override
     public Vacation add(Vacation vacation) {
-        final String sql = "insert into vacation (vacation_id, `description`, "
-                +"leasure_level) values (?,?,?);";
+        final String sql = "insert into vacation (`description`, "
+                +"leasure_level) values (?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -71,7 +71,6 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
     @Override
     public boolean update(Vacation vacation) {
         final String sql = "update vacation set "
-                +"vacation_id =?, "
                 +"`description` =?, "
                 +"leasure_level =? "
 
