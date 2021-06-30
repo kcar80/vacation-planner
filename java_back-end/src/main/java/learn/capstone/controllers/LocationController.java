@@ -41,7 +41,7 @@ public class LocationController {
 
     @PutMapping("/{locationId}")
     public ResponseEntity<Object> update(@PathVariable int locationId, @RequestBody Location location) {
-        if (locationId != location.getLocation_id()) {
+        if (locationId != location.getLocationId()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 

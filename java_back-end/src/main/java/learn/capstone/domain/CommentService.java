@@ -29,7 +29,7 @@ public class CommentService {
             return result;
         }
 
-        if (comment.getComment_id() != 0) {
+        if (comment.getCommentId() != 0) {
             result.addMessage("commentId cannot be set for `add` operation", ResultType.INVALID);
             return result;
         }
@@ -45,13 +45,13 @@ public class CommentService {
             return result;
         }
 
-        if (comment.getComment_id() <= 0) {
+        if (comment.getCommentId() <= 0) {
             result.addMessage("commentId must be set for `update` operation", ResultType.INVALID);
             return result;
         }
 
         if (!repository.update(comment)) {
-            String msg = String.format("commentId: %s, not found", comment.getComment_id());
+            String msg = String.format("commentId: %s, not found", comment.getCommentId());
             result.addMessage(msg, ResultType.NOT_FOUND);
         }
 
@@ -73,11 +73,11 @@ public class CommentService {
             result.addMessage("description is required", ResultType.INVALID);
         }
 
-        if(Validations.isZeroOrLessThanZero(comment.getUser_id())) {
+        if(Validations.isZeroOrLessThanZero(comment.getUserId())) {
             result.addMessage("user_id needs to be greater than 0", ResultType.INVALID);
         }
 
-        if(Validations.isZeroOrLessThanZero(comment.getVacation_id())) {
+        if(Validations.isZeroOrLessThanZero(comment.getVacationId())) {
             result.addMessage("vacation_id needs to be greater than 0", ResultType.INVALID);
         }
 

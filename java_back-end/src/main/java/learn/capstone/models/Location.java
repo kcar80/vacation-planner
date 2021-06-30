@@ -1,23 +1,23 @@
 package learn.capstone.models;
 
 public class Location {
-    private int location_id;
+    private int locationId;
     private String description;
 
     public Location() {
     }
 
-    public Location(int location_id, String description) {
-        this.location_id = location_id;
+    public Location(int locationId, String description) {
+        this.locationId = locationId;
         this.description = description;
     }
 
-    public int getLocation_id() {
-        return location_id;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setLocation_id(int location_id) {
-        this.location_id = location_id;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public String getDescription() {

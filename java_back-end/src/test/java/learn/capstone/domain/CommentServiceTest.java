@@ -30,7 +30,7 @@ class CommentServiceTest {
     @Test
     void shouldNotAddWhenInvalid() {
         Comment comment = makeComment();
-        comment.setComment_id(0);
+        comment.setCommentId(0);
         comment.setText(null);
         Result<Comment> result = service.add(comment);
         assertEquals(ResultType.INVALID, result.getType());
@@ -40,7 +40,7 @@ class CommentServiceTest {
     void shouldAddWhenValid() {
         Comment comment = makeComment();
         Comment com = makeComment();
-        com.setComment_id(0);
+        com.setCommentId(0);
 
         when(repository.add(com)).thenReturn(comment);
         Result<Comment> result = service.add(com);
@@ -53,9 +53,9 @@ class CommentServiceTest {
     void shouldNotUpdateInvalid() {
         Comment comment = makeComment();
         Comment expected = makeComment();
-        expected.setComment_id(0);
+        expected.setCommentId(0);
         Comment local = new Comment();
-        local.setComment_id(1);
+        local.setCommentId(1);
         local.setText(null);
 
         when(repository.add(expected)).thenReturn(comment);
@@ -69,12 +69,12 @@ class CommentServiceTest {
     void shouldUpdateValid() {
         Comment comment = makeComment();
         Comment expected = makeComment();
-        expected.setComment_id(0);
+        expected.setCommentId(0);
         Comment com = new Comment();
-        com.setComment_id(1);
+        com.setCommentId(1);
         com.setText("Updated Test");
-        com.setUser_id(1);
-        com.setVacation_id(1);
+        com.setUserId(1);
+        com.setVacationId(1);
 
         when(repository.add(expected)).thenReturn(comment);
 
@@ -87,7 +87,7 @@ class CommentServiceTest {
     void shouldNotDelete() {
         Comment comment = makeComment();
         Comment expected = makeComment();
-        expected.setComment_id(0);
+        expected.setCommentId(0);
 
         when(repository.add(comment)).thenReturn(expected);
 
@@ -100,7 +100,7 @@ class CommentServiceTest {
     void shouldDelete() {
         Comment comment = makeComment();
         Comment expected = makeComment();
-        expected.setComment_id(0);
+        expected.setCommentId(0);
 
         when(repository.add(comment)).thenReturn(expected);
 
@@ -112,8 +112,8 @@ class CommentServiceTest {
     private Comment makeComment() {
         Comment comment = new Comment();
         comment.setText("Test Text");
-        comment.setUser_id(1);
-        comment.setVacation_id(1);
+        comment.setUserId(1);
+        comment.setVacationId(1);
         return comment;
     }
 }

@@ -11,7 +11,7 @@ public class LocationMapper implements RowMapper<Location> {
     @Override
     public Location mapRow(ResultSet resultSet, int i) throws SQLException {
         Location location = new Location();
-        location.setLocation_id(resultSet.getInt("location_id"));
+        location.setLocationId(resultSet.getInt("location_id"));
         location.setDescription(resultSet.getString("description"));
         return location;
     }

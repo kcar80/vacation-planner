@@ -36,7 +36,7 @@ public class LocationJdbcTemplateRepositoryTest {
     @Test
     void shouldFindById() {
         Location location = repository.findById(1);
-        assertEquals(1, location.getLocation_id());
+        assertEquals(1, location.getLocationId());
     }
 
     @Test
@@ -44,15 +44,15 @@ public class LocationJdbcTemplateRepositoryTest {
         Location location = makeLocation();
         Location actual = repository.add(location);
         assertNotNull(actual);
-        assertEquals(NEXT_ID, actual.getLocation_id());
+        assertEquals(NEXT_ID, actual.getLocationId());
     }
 
     @Test
     void shouldUpdate() {
         Location location = makeLocation();
-        location.setLocation_id(1);
+        location.setLocationId(1);
         assertTrue(repository.update(location));
-        location.setLocation_id(13);
+        location.setLocationId(13);
         assertFalse(repository.update(location));
     }
 
