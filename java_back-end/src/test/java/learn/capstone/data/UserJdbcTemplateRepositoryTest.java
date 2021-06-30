@@ -26,10 +26,10 @@ class UserJdbcTemplateRepositoryTest {
 
     @Test
     void shouldFindAll() {
-        List<User> users = repository.findAll();
-        assertNotNull(users);
+        List<User> all = repository.findAll();
 
-        assertEquals(3, users.size());
+        assertNotNull(all);
+        assertEquals(3, all.size());
     }
-
+  
 }
