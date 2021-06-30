@@ -76,6 +76,7 @@ public class LocationJdbcTemplateRepository implements LocationRepository {
     @Override
     @Transactional
     public boolean deleteById(int locationId) {
+        jdbcTemplate.update("delete from vacation_stops where location_id = ?;", locationId);
         return jdbcTemplate.update("delete from location where location_id = ?;", locationId) > 0;
     }
 }

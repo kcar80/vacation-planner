@@ -32,4 +32,39 @@ public class LocationJdbcTemplateRepositoryTest {
         assertNotNull(locations);
         assertTrue(locations.size() >= 6 && locations.size() <= 10);
     }
+
+    @Test
+    void shouldFindById() {
+        Location location = repository.findById(1);
+        assertEquals(1, location.getLocation_id());
+    }
+
+    @Test
+    void shouldAdd() {
+        Location location = makeLocation();
+        Location actual = repository.add(location);
+        assertNotNull(actual);
+        assertEquals(NEXT_ID, actual.getLocation_id());
+    }
+
+    @Test
+    void shouldUpdate() {
+        Location location = makeLocation();
+        location.setLocation_id(1);
+        assertTrue(repository.update(location));
+        location.setLocation_id(13);
+        assertFalse(repository.update(location));
+    }
+
+    @Test
+    void shouldDelete() {
+        assertTrue(repository.deleteById(2));
+        assertFalse(repository.deleteById(2));
+    }
+
+    private Location makeLocation() {
+        Location location = new Location();
+        location.setDescription("Test Location");
+        return location;
+    }
 }
