@@ -34,7 +34,13 @@ class VacationJdbcTemplateRepositoryTest {
     }
 
     @Test
-    
+    void shouldFindMNTrip(){
+        Vacation mn = repository.findById(1);
+        assertEquals(1, mn.getVacationId());
+        assertEquals("A trip to the capital of MN", mn.getDescription() );
+        assertEquals(1, mn.getUsers().size());
+    }
+
 
 
     private Vacation makeVacation(){

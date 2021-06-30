@@ -42,6 +42,7 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
 
         if(vacation !=null){
             addUsers(vacation);
+            addLocations(vacation);
 
         }
 
