@@ -36,7 +36,7 @@ public class CommentJdbcTemplateRepositoryTest {
     @Test
     void shouldFindById() {
         Comment comment = repository.findById(1);
-        assertEquals(1, comment.getComment_id());
+        assertEquals(1, comment.getCommentId());
     }
 
     @Test
@@ -44,15 +44,15 @@ public class CommentJdbcTemplateRepositoryTest {
         Comment comment = makeComment();
         Comment actual = repository.add(comment);
         assertNotNull(actual);
-        assertEquals(NEXT_ID, actual.getComment_id());
+        assertEquals(NEXT_ID, actual.getCommentId());
     }
 
     @Test
     void shouldUpdate() {
         Comment comment = makeComment();
-        comment.setComment_id(1);
+        comment.setCommentId(1);
         assertTrue(repository.update(comment));
-        comment.setComment_id(13);
+        comment.setCommentId(13);
         assertFalse(repository.update(comment));
     }
 
@@ -65,8 +65,8 @@ public class CommentJdbcTemplateRepositoryTest {
     private Comment makeComment() {
         Comment comment = new Comment();
         comment.setText("Test Text");
-        comment.setUser_id(1);
-        comment.setVacation_id(1);
+        comment.setUserId(1);
+        comment.setVacationId(1);
         return comment;
     }
 }

@@ -50,8 +50,8 @@ public class CommentJdbcTemplateRepository implements CommentRepository {
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, comment.getText());
-            ps.setInt(2, comment.getUser_id());
-            ps.setInt(3, comment.getVacation_id());
+            ps.setInt(2, comment.getUserId());
+            ps.setInt(3, comment.getVacationId());
             return ps;
         }, keyHolder);
 
@@ -59,7 +59,7 @@ public class CommentJdbcTemplateRepository implements CommentRepository {
             return null;
         }
 
-        comment.setComment_id(keyHolder.getKey().intValue());
+        comment.setCommentId(keyHolder.getKey().intValue());
         return comment;
     }
 
@@ -74,9 +74,9 @@ public class CommentJdbcTemplateRepository implements CommentRepository {
 
         return jdbcTemplate.update(sql,
                 comment.getText(),
-                comment.getUser_id(),
-                comment.getVacation_id(),
-                comment.getComment_id()) > 0;
+                comment.getUserId(),
+                comment.getVacationId(),
+                comment.getCommentId()) > 0;
     }
 
     @Override

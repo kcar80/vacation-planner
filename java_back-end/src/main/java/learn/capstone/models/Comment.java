@@ -1,27 +1,27 @@
 package learn.capstone.models;
 
 public class Comment {
-    private int comment_id;
+    private int commentId;
     private String text;
-    private int user_id;
-    private int vacation_id;
+    private int userId;
+    private int vacationId;
 
     public Comment() {
     }
 
-    public Comment(int comment_id, String text, int user_id, int vacation_id) {
-        this.comment_id = comment_id;
+    public Comment(int commentId, String text, int userId, int vacationId) {
+        this.commentId = commentId;
         this.text = text;
-        this.user_id = user_id;
-        this.vacation_id = vacation_id;
+        this.userId = userId;
+        this.vacationId = vacationId;
     }
 
-    public int getComment_id() {
-        return comment_id;
+    public int getCommentId() {
+        return commentId;
     }
 
-    public void setComment_id(int comment_id) {
-        this.comment_id = comment_id;
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 
     public String getText() {
@@ -32,19 +32,19 @@ public class Comment {
         this.text = text;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getVacation_id() {
-        return vacation_id;
+    public int getVacationId() {
+        return vacationId;
     }
 
-    public void setVacation_id(int vacation_id) {
-        this.vacation_id = vacation_id;
+    public void setVacationId(int vacationId) {
+        this.vacationId = vacationId;
     }
 }

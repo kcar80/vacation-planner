@@ -57,7 +57,7 @@ public class LocationJdbcTemplateRepository implements LocationRepository {
             return null;
         }
 
-        location.setLocation_id(keyHolder.getKey().intValue());
+        location.setLocationId(keyHolder.getKey().intValue());
         return location;
     }
 
@@ -70,7 +70,7 @@ public class LocationJdbcTemplateRepository implements LocationRepository {
 
         return jdbcTemplate.update(sql,
                 location.getDescription(),
-                location.getLocation_id()) > 0;
+                location.getLocationId()) > 0;
     }
 
     @Override

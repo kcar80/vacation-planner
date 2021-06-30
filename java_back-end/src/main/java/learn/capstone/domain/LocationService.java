@@ -29,7 +29,7 @@ public class LocationService {
             return result;
         }
 
-        if (location.getLocation_id() != 0) {
+        if (location.getLocationId() != 0) {
             result.addMessage("locationId cannot be set for `add` operation", ResultType.INVALID);
             return result;
         }
@@ -45,13 +45,13 @@ public class LocationService {
             return result;
         }
 
-        if (location.getLocation_id() <= 0) {
+        if (location.getLocationId() <= 0) {
             result.addMessage("locationId must be set for `update` operation", ResultType.INVALID);
             return result;
         }
 
         if (!repository.update(location)) {
-            String msg = String.format("locationId: %s, not found", location.getLocation_id());
+            String msg = String.format("locationId: %s, not found", location.getLocationId());
             result.addMessage(msg, ResultType.NOT_FOUND);
         }
 
