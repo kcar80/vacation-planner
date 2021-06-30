@@ -146,7 +146,16 @@ begin
 	from vacation
 	inner join user
 	where user.user_id in (1, 3)
-and vacation.vacation_id != 2;
+	and vacation.vacation_id != 2;
+
+	-- vacation_stops inserts
+	insert into vacation_stops
+		(vacation_id, location_id, start_date, end_date, identifier)
+	values
+		(1, 1, '2021-07-04', '2021-07-11', concat(vacation_id, '-', location_id)),
+		(2, 2, '2021-08-04', '2021-08-11', concat(vacation_id, '-', location_id)),
+		(3, 3, '2021-09-04', '2021-09-11', concat(vacation_id, '-', location_id)),
+		(4, 4, '2021-10-04', '2021-10-11', concat(vacation_id, '-', location_id));
 end //
 -- Change the statement terminator back to the original.
 delimiter ;

@@ -13,4 +13,23 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class UserJdbcTemplateRepositoryTest {
 
+    @Autowired
+    UserJdbcTemplateRepository repository;
+
+    @Autowired
+    KnownGoodState knownGoodState;
+
+    @BeforeEach
+    void setup() {
+        knownGoodState.set();
+    }
+
+    @Test
+    void shouldFindAll() {
+        List<User> all = repository.findAll();
+
+        assertNotNull(all);
+        assertEquals(3, all.size());
+    }
+  
 }

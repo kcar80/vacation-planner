@@ -1,6 +1,5 @@
 package learn.capstone.data.mappers;
 
-import learn.capstone.models.Location;
 import learn.capstone.models.VacationStops;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -12,8 +11,8 @@ public class VacationStopMapper implements RowMapper<VacationStops> {
     public VacationStops mapRow(ResultSet resultSet, int i) throws SQLException {
         VacationStops vacationStops = new VacationStops();
         vacationStops.setVacationId(resultSet.getInt("vacation_id"));
-        vacationStops.setStart_date(resultSet.getDate("start_date").toLocalDate());
-        vacationStops.setEnd_date(resultSet.getDate("end_date").toLocalDate());
+        vacationStops.setStartDate(resultSet.getDate("start_date").toLocalDate());
+        vacationStops.setEndDate(resultSet.getDate("end_date").toLocalDate());
         vacationStops.setIdentifier(resultSet.getString("identifier"));
 
         LocationMapper locationMapper = new LocationMapper();

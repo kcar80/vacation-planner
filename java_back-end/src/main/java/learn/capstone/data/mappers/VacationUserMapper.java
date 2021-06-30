@@ -10,7 +10,7 @@ public class VacationUserMapper implements RowMapper<VacationUser> {
     @Override
     public VacationUser mapRow(ResultSet resultSet, int i) throws SQLException {
         VacationUser vacationUser = new VacationUser();
-        vacationUser.setVacation_id(resultSet.getInt("vacation_id"));
+        vacationUser.setVacationId(resultSet.getInt("vacation_id"));
         vacationUser.setIdentifier(resultSet.getString("identifier"));
 
         UserMapper userMapper = new UserMapper();

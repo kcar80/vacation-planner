@@ -130,6 +130,7 @@ inner join user
 where user.user_id in (1, 3)
 and vacation.vacation_id != 2;
 
+-- vacation_stops inserts
 insert into vacation_stops
 	(vacation_id, location_id, start_date, end_date, identifier)
 values
