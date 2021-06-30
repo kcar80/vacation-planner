@@ -33,12 +33,21 @@ class VacationJdbcTemplateRepositoryTest {
         assertTrue(vacations.size() == 6);
     }
 
+    @Test
+    void shouldFindMNTrip(){
+        Vacation mn = repository.findById(1);
+        assertEquals(1, mn.getVacationId());
+        assertEquals("A trip to the capital of MN", mn.getDescription() );
+        assertEquals(1, mn.getUsers().size());
+    }
+
+
 
     private Vacation makeVacation(){
         Vacation vacation = new Vacation();
         vacation.setDescription("test");
         vacation.setLeisureLevel(2);
-        vacation.setLocationId(4);
+
         return vacation;
     }
 
