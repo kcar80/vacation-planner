@@ -38,17 +38,18 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
     @Override
     public User add(User user) {
-        final String sql = "insert into user (first_name, last_name, user_name, password, user_type( "
-                + "values (?,?,?,?,?);";
+        final String sql = "insert into user (user_id, first_name, last_name, user_name, password, user_type) "
+                + "values (?,?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.getFirstName());
-            ps.setString(2, user.getLastName());
-            ps.setString(3, user.getUsername());
-            ps.setString(4, user.getPassword());
-            ps.setBoolean(5, user.getUserType());
+            ps.setInt(1, user.getUserId());
+            ps.setString(2, user.getFirstName());
+            ps.setString(3, user.getLastName());
+            ps.setString(4, user.getUsername());
+            ps.setString(5, user.getPassword());
+            ps.setBoolean(6, user.getUserType());
             return ps;
         }, keyHolder);
 
@@ -80,6 +81,8 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
     @Override
     public boolean deleteById(int id) {
-        return jdbcTemplate.update("delete from user where user_id = ?", id) > 0;
+        jdbcTemplate.update("delete from comment where user_id = ?;", id);
+        jdbcTemplate.update("delete from vacation_user where user_id = ?;", id);
+        return jdbcTemplate.update("delete from user where user_id = ?;", id) > 0;
     }
 }
