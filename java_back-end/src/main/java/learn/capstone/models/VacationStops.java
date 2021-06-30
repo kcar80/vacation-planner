@@ -5,21 +5,11 @@ import java.time.LocalDate;
 public class VacationStops {
 
     private int vacationId;
-    private int locationId;
     private LocalDate start_date;
     private LocalDate end_date;
     private String identifier;
 
-    private Vacation vacation;
     private Location location;
-
-    public Vacation getVacation() {
-        return vacation;
-    }
-
-    public void setVacation(Vacation vacation) {
-        this.vacation = vacation;
-    }
 
     public Location getLocation() {
         return location;
@@ -37,13 +27,6 @@ public class VacationStops {
         this.vacationId = vacationId;
     }
 
-    public int getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
 
     public LocalDate getStart_date() {
         return start_date;
