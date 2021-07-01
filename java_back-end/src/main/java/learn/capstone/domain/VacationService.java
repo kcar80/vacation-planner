@@ -54,7 +54,8 @@ public class VacationService {
             }
             return result;
         }
-        result.setPayload(vacationRepository.add(vacation));
+        vacation = vacationRepository.add(vacation);
+        result.setPayload(vacation);
         return result;
     }
 

@@ -1,5 +1,6 @@
 package learn.capstone.controllers;
 
+import learn.capstone.domain.Result;
 import learn.capstone.domain.VacationService;
 import learn.capstone.models.Vacation;
 import org.springframework.http.HttpStatus;
@@ -35,10 +36,16 @@ public class VacationController {
     public ResponseEntity<Object> add(
             @RequestBody @Valid Vacation vacation,
             BindingResult result){
+
+
         if(result.hasErrors()){
             return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(vacation, HttpStatus.CREATED);
+        Result<Vacation> vacationResult= service.add(vacation);
+        if(!vacationResult.isSuccess()){
+            return ErrorResponse.build(vacationResult);
+        }
+        return new ResponseEntity<>(vacationResult.getPayload(), HttpStatus.CREATED);
     }
 
     @PutMapping("/{vacationId}")
