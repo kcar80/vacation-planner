@@ -32,6 +32,11 @@ public class VacationController {
         return service.findById(vacationId);
     }
 
+    @GetMapping("/{userId}")
+    public List<Vacation> findByUserId(@PathVariable int userId){
+        return service.findByUserId(userId);
+    }
+
     @PostMapping
     public ResponseEntity<Object> add(
             @RequestBody @Valid Vacation vacation,

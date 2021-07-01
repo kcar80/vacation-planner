@@ -9,8 +9,12 @@ public interface VacationRepository {
 
     List<Vacation> findAll();
 
+    List<Vacation> findByUserId(int userId);
+
     @Transactional
     Vacation findById (int vacationId);
+
+
 
     Vacation add(Vacation vacation);
 

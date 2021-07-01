@@ -40,6 +40,8 @@ public class VacationService {
         return vacationRepository.findById(vacationId);
     }
 
+    public List<Vacation> findByUserId(int userId) {return vacationRepository.findByUserId(userId);}
+
     public Result<Vacation> add(Vacation vacation){
         Result<Vacation> result = new Result<>();
 
