@@ -40,7 +40,7 @@ class VacationUserJdbcRepositoryTest {
     void shouldUpdate(){
         VacationUser vacationUser = makeVacationUser();
         vacationUser.setIdentifier("20-20");
-        vacationUser.getUser().setUserId(1);
+
         assertTrue(repository.update(vacationUser));
 
         vacationUser.setVacationId(15);
@@ -50,8 +50,8 @@ class VacationUserJdbcRepositoryTest {
 
     @Test
     void shouldDelete(){
-        assertTrue(repository.deleteByKey(5, 1));
-        assertFalse(repository.deleteByKey(5, 1));
+        assertTrue(repository.deleteByKey(5, 3));
+        assertFalse(repository.deleteByKey(5, 3));
     }
 
     VacationUser makeVacationUser(){
