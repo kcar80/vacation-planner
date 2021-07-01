@@ -51,29 +51,29 @@ class VacationControllerTest {
                 .andExpect(content().json(expectedJson));
     }
 
-//    @Test
-//    void shouldAdd() throws Exception {
-//       Vacation expected= new Vacation(0, "Hiking trip", 1);
-//        Vacation actual =new Vacation(1, "Hiking trip", 1);
-//
-//
-//        Result<Vacation> result = new Result<>();
-//        result.setPayload(actual);
-//        when(service.add(any())).thenReturn(result);
-//
-//        ObjectMapper jsonMapper = new ObjectMapper();
-//        String jsonIn = jsonMapper.writeValueAsString(expected);
-//        String expectedJson = jsonMapper.writeValueAsString(actual);
-//
-//        var request = post("/api/vacation")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(jsonIn);
-//
-//        mvc.perform(request)
-//                .andExpect(status().isCreated())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(content().json(expectedJson));
-//    }
+    @Test
+    void shouldAdd() throws Exception {
+       Vacation expected= new Vacation(0, "Hiking trip", 1);
+        Vacation actual =new Vacation(1, "Hiking trip", 1);
+
+
+        Result<Vacation> result = new Result<>();
+        result.setPayload(actual);
+        when(service.add(any())).thenReturn(result);
+
+        ObjectMapper jsonMapper = new ObjectMapper();
+        String jsonIn = jsonMapper.writeValueAsString(expected);
+        String expectedJson = jsonMapper.writeValueAsString(actual);
+
+        var request = post("/api/vacation")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonIn);
+
+        mvc.perform(request)
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(expectedJson));
+    }
 
     @Test
     void shouldNotAddNull() throws Exception {

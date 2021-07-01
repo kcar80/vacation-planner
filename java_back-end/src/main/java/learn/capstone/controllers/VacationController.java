@@ -35,6 +35,7 @@ public class VacationController {
     public ResponseEntity<Object> add(
             @RequestBody @Valid Vacation vacation,
             BindingResult result){
+
         if(result.hasErrors()){
             return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
