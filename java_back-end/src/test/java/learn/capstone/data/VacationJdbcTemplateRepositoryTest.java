@@ -34,6 +34,14 @@ class VacationJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByUserId(){
+        List<Vacation> vacations = repository.findByUserId(2);
+        assertNotNull(vacations);
+
+        assertTrue(vacations.size() >= 1 && vacations.size() <= 3);
+    }
+
+    @Test
     void shouldFindMNTrip(){
         Vacation mn = repository.findById(1);
         assertEquals(1, mn.getVacationId());

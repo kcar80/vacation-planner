@@ -33,6 +33,17 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
     }
 
     @Override
+    public List<Vacation> findByUserId(int userId) {
+        final String sql = "select v.vacation_id, v.description, v.leasure_level " +
+                "from vacation v " +
+                "inner join vacation_user vu on vu.vacation_id = v.vacation_id " +
+                "inner join user u on u.user_id = vu.user_id " +
+                "where u.user_id=?;";
+
+        return jdbcTemplate.query(sql, new VacationMapper(), userId) ;
+    }
+
+    @Override
     @Transactional
     public Vacation findById(int vacationId) {
         final String sql = "select vacation_id, `description`, "
