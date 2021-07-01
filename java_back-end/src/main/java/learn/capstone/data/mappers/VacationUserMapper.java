@@ -11,10 +11,12 @@ public class VacationUserMapper implements RowMapper<VacationUser> {
     public VacationUser mapRow(ResultSet resultSet, int i) throws SQLException {
         VacationUser vacationUser = new VacationUser();
         vacationUser.setVacationId(resultSet.getInt("vacation_id"));
-        vacationUser.setIdentifier(resultSet.getString("identifier"));
+
 
         UserMapper userMapper = new UserMapper();
         vacationUser.setUser(userMapper.mapRow(resultSet, i));
+
+        vacationUser.setIdentifier(resultSet.getString("identifier"));
         return vacationUser;
     }
 }

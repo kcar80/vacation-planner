@@ -2,8 +2,10 @@ package learn.capstone.domain;
 
 import learn.capstone.data.VacationRepository;
 import learn.capstone.data.VacationStopsRepository;
+import learn.capstone.data.VacationUserRepository;
 import learn.capstone.models.Vacation;
 import learn.capstone.models.VacationStops;
+import learn.capstone.models.VacationUser;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
@@ -17,14 +19,16 @@ import java.util.Set;
 public class VacationService {
     private final VacationRepository vacationRepository;
     private final VacationStopsRepository vacationStopsRepository;
+    private final VacationUserRepository vacationUserRepository;
 
 
 
 
 
-    public VacationService(VacationRepository vacationRepository, VacationStopsRepository vacationStopsRepository) {
+    public VacationService(VacationRepository vacationRepository, VacationStopsRepository vacationStopsRepository, VacationUserRepository vacationUserRepository) {
         this.vacationRepository = vacationRepository;
         this.vacationStopsRepository = vacationStopsRepository;
+        this.vacationUserRepository = vacationUserRepository;
 
     }
 
@@ -82,6 +86,38 @@ public class VacationService {
 
     public boolean deleteById(int vacationId){
         return vacationRepository.deleteById(vacationId);
+    }
+
+    public Result<Void> addUser(VacationUser vacationUser){
+        Result<Void> result = validate(vacationUser);
+        if (!result.isSuccess()){
+            return result;
+        }
+        if(!vacationUserRepository.add(vacationUser)){
+            result.addMessage("user not added", ResultType.INVALID);
+        }
+        return result;
+    }
+
+    public Result<Void> updateUser(VacationUser vacationUser){
+        Result<Void> result = validate(vacationUser);
+        if (!result.isSuccess()) {
+            return result;
+        }
+
+        if (!vacationUserRepository.update(vacationUser)) {
+            String msg = String.format("update failed for vacation id %s, user id %s: not found",
+                    vacationUser.getVacationId(),
+                    vacationUser.getUser().getUserId());
+            result.addMessage(msg, ResultType.NOT_FOUND);
+        }
+
+        return result;
+
+    }
+
+    public boolean deleteUserByKey(int vacationId, int userId) {
+        return vacationStopsRepository.deleteByKey(vacationId, userId);
     }
 
 
@@ -161,4 +197,23 @@ public class VacationService {
 
         return result;
     }
+
+    private Result<Void> validate(VacationUser vacationUser) {
+        Result<Void> result = new Result<>();
+        if (vacationUser == null) {
+            result.addMessage("vacationUser cannot be null", ResultType.INVALID);
+            return result;
+        }
+
+        if (vacationUser.getUser() == null) {
+            result.addMessage("user cannot be null", ResultType.INVALID);
+        }
+
+        if (Validations.isNullOrBlank(vacationUser.getIdentifier())) {
+            result.addMessage("identifier is required", ResultType.INVALID);
+        }
+
+        return result;
+    }
+
 }

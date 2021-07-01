@@ -66,6 +66,35 @@ class VacationServiceTest {
         Result<Vacation> actual = service.add(vacation);
     }
 
+    @Test
+    void shouldUpdate(){
+        Vacation vacation = makeVacation();
+        vacation.setVacationId(5);
+
+        when(vacationRepository.update(vacation)).thenReturn(true);
+        Result<Vacation> actual = service.update(vacation);
+        assertEquals(ResultType.SUCCESS, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateMissing(){
+        Vacation vacation = makeVacation();
+        vacation.setVacationId(50);
+
+        when(vacationRepository.update(vacation)).thenReturn(false);
+        Result<Vacation> actual = service.update(vacation);
+        assertEquals(ResultType.NOT_FOUND, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateInvalid(){
+        Vacation vacation = makeVacation();
+        vacation.setVacationId(5);
+        vacation.setDescription(null);
+
+        Result<Vacation> actual = service.update(vacation);
+        assertEquals(ResultType.NOT_FOUND, actual.getType());
+    }
 
     private Vacation makeVacation(){
         Vacation vacation = new Vacation();
@@ -74,5 +103,7 @@ class VacationServiceTest {
 
         return vacation;
     }
+
+
 
 }

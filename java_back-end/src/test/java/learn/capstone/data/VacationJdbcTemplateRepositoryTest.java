@@ -47,6 +47,11 @@ class VacationJdbcTemplateRepositoryTest {
         Vacation actual = repository.add(vacation);
         assertNotNull(actual);
         assertEquals(NEXT_ID, actual.getVacationId());
+
+        vacation = makeVacation();
+        actual = repository.add(vacation);
+        assertNotNull(actual);
+        assertEquals(8, actual.getVacationId());
     }
 
     @Test

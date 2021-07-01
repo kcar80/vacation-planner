@@ -16,7 +16,7 @@ public class VacationUserJdbcRepository implements VacationUserRepository{
 
     @Override
     public boolean add(VacationUser vacationUser) {
-        final String sql = "insert into vacation_user (vacation_id, user_id, identifier) values"
+        final String sql = "insert into vacation_user (vacation_id, user_id, identifier) values "
                 + "(?,?,?);";
 
         return jdbcTemplate.update(sql,
@@ -29,7 +29,7 @@ public class VacationUserJdbcRepository implements VacationUserRepository{
     public boolean update(VacationUser vacationUser) {
 
         final String sql = "update vacation_user set "
-                +"identifier =? "
+                +" identifier = ?  "
                 +"where vacation_id= ? and user_id =?;";
         return jdbcTemplate.update(sql,
                 vacationUser.getIdentifier(),
