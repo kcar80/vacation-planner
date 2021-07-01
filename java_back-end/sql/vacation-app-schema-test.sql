@@ -22,7 +22,7 @@ create table user (
 	user_id int primary key auto_increment,
 	first_name varchar(50) not null,
 	last_name varchar(50) not null,
-	user_name varchar(50) not null,
+	user_name varchar(50) not null unique,
 	password varchar(50) not null,
 	user_type tinyint not null
 );

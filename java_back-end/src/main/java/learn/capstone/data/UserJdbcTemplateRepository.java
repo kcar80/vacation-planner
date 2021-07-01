@@ -37,6 +37,15 @@ public class UserJdbcTemplateRepository implements UserRepository{
     }
 
     @Override
+    public User findByUsername(String username) {
+        final String sql = "select user_id, first_name, last_name, user_name, password, user_type "
+                + "from user where user_name = ?;";
+        User user = jdbcTemplate.query(sql, new UserMapper(), username).stream().findFirst().orElse(null);
+
+        return user;
+    }
+
+    @Override
     public User add(User user) {
         final String sql = "insert into user (user_id, first_name, last_name, user_name, password, user_type) "
                 + "values (?,?,?,?,?,?);";

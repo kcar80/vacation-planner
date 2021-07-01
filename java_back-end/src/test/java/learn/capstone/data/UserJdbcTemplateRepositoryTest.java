@@ -41,6 +41,14 @@ public class UserJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByUsername() {
+        User user = repository.findByUsername("kathryn@gmail.com");
+
+        assertNotNull(user);
+        assertEquals(3, user.getUserId());
+    }
+
+    @Test
     void shouldAdd() {
         User user = new User(0, "Test", "User", "testuser", "password", false);
 

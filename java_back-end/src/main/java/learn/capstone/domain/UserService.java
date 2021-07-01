@@ -22,6 +22,10 @@ public class UserService {
         return repository.findById(id);
     }
 
+    public User findByUsername(String username) {
+        return repository.findByUsername(username);
+    }
+
     public Result<User> add(User user) {
         Result<User> result = validateNewUser(user);
 
@@ -66,6 +70,10 @@ public class UserService {
 
         if (user.getUserId() != 0) {
             result.addMessage("ID cannot be set for 'add' method", ResultType.INVALID);
+        }
+
+        if (findByUsername(user.getUsername()) != null) {
+            result.addMessage("Username must be unique.", ResultType.INVALID);
         }
 
         return result;

@@ -88,6 +88,14 @@ class UserServiceTest {
     }
 
     @Test
+    void shouldNotAddWithDuplicateUsername() {
+        User user = new User(4, "test", "test", "kathryn@gmail.com", "test", false);
+
+        Result<User> result = service.add(user);
+        assertFalse(result.isSuccess());
+    }
+
+    @Test
     void shouldAdd() {
         User user = new User(0, "test", "test", "test", "test", false);
 
