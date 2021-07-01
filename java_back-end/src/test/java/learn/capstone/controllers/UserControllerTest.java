@@ -45,7 +45,7 @@ class UserControllerTest {
         String expectedJson = jsonMapper.writeValueAsString(allUsers);
 
         when(service.findAll()).thenReturn(allUsers);
-;
+
         mvc.perform(get("/api/user"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -58,7 +58,7 @@ class UserControllerTest {
         User setUser = new User(1, "test", "test", "test", "test", false);
 
         Result<User> result = new Result<>();
-        result.setPayload(user);
+        result.setPayload(setUser);
         when(service.add(any())).thenReturn(result);
 
         ObjectMapper jsonMapper = new ObjectMapper();
