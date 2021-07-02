@@ -9,5 +9,5 @@ export const emptyUser = {
     lastName: "",
     userName: "",
     password: "",
-    userType: "false"
+    userType: "true"
 };
