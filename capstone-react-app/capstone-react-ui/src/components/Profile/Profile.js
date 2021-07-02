@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
 import { findById } from "../AdministratorTools/locations";
 import { Link } from "react-router-dom";
-import LoginContext from "../../contexts/LoginContext";
 import { findByUsername } from "../../services/users";
 import emptyUser from "../../services/User";
 
@@ -11,10 +10,9 @@ const passwordType = {
     SHOWN: "text"
 }
 
-function Profile() {
+function Profile({ username }) {
 
     const [passwordState, setPasswordState] = useState(passwordType.HIDDEN);
-    const [username, logout] = useContext(LoginContext);
     const [user, setUser] = useState(emptyUser);
     const [vacations, setVacations] = useState([]);
     const history = useHistory();
