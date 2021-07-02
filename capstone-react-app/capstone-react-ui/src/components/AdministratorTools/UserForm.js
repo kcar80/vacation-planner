@@ -51,9 +51,9 @@ function UserForm(){
                     value={user.lastName} onChange={onChange} required />
             </div>
             <div className="form-group">
-                <label htmlFor="userName">User Name</label>
-                <input type="text" className="form-control" id="userName" name="userName"
-                    value={user.userName} onChange={onChange} required />
+                <label htmlFor="username">User Name</label>
+                <input type="text" className="form-control" id="username" name="username"
+                    value={user.username} onChange={onChange} required />
             </div>
             <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -62,7 +62,7 @@ function UserForm(){
             </div>
             <div className="form-group">
                 <label htmlFor="userType">User Type</label>
-                <input type="" className="form-control" id="userType" name="userType"
+                <input type="text" className="form-control" id="userType" name="userType"
                     value={user.userType} onChange={onChange} required />
             </div>
         
@@ -77,4 +77,4 @@ function UserForm(){
 
 }
 
-export default Userform;
+export default UserForm;

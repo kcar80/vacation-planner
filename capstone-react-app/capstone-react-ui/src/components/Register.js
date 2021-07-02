@@ -42,7 +42,7 @@ function Register() {
                 <input type="text" id="firstName" name="firstName" className="form-control"
                     value={user.firstName} onChange={onChange} />
             </div>
-            <div className="form-group">
+            <div className="form-group mb-2">
                 <label htmlFor="lastName">Last Name</label>
                 <input type="text" id="lastName" name="lastName" className="form-control"
                     value={user.lastName} onChange={onChange} />
