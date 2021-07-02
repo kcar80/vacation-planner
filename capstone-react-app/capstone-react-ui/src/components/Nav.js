@@ -25,7 +25,6 @@ function Nav(){
             {username==="admin" ? <Link to="/admintools" className="btn btn-primary">Admin</Link> : <div></div>}
           </div>
       </div>
-
       <div>
         {username ? <p>Welcome {username} to Trip Advisory Plus!</p> : <p>Welcome to Trip Advisory Plus!</p>}
       </div>
