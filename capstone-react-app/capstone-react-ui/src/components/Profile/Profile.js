@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
-import { findVacationsByUser, findLocationById } from "../services/users";
+import { findById } from "../AdministratorTools/locations";
 import { Link } from "react-router-dom";
-import LoginContext from ".../contexts/LoginContext";
+import LoginContext from "../../contexts/LoginContext";
 import { findByUsername } from "../../services/users";
 import emptyUser from "../../services/User";
 
@@ -25,11 +25,11 @@ function Profile() {
             .catch(() => history.push("/failure"));
     }, [history]);
 
-    useEffect(() => {
-        findVacationsByUser(user.userId)
-            .then(setVacations)
-            .catch(() => history.push("/failure"));
-    }, [history]);
+    // useEffect(() => {
+    //     findVacationsByUser(user.userId)
+    //         .then(setVacations)
+    //         .catch(() => history.push("/failure"));
+    // }, [history]);
 
     
     const changePasswordState = evt => {
@@ -71,7 +71,7 @@ function Profile() {
                     {v.locations.map(l => 
                         <li>
                             <div className="row">
-                                <div className="col">{findLocationById(l.locationId)}</div>
+                                <div className="col">{findById(l.locationId)}</div>
                                 <div className="col">{l.startDate}</div>
                                 <div className="col">{l.endDate}</div>
                             </div>
