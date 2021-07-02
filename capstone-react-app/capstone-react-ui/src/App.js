@@ -5,6 +5,7 @@ import Fail from "./components/Fail";
 import MainPage from "./MainPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Profile from "./components/Profile/Profile";
 
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/failure">
             <Fail />
