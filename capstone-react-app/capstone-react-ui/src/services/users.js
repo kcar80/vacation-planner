@@ -8,6 +8,14 @@ export async function findById(userId) {
     return Promise.reject("not 200 OK");
 }
 
+export async function findByUsername(username) {
+    const response = await fetch(`${url}/${username}`);
+    if (response.status === 200) {
+        return await response.json();
+    }
+    return Promise.reject("not 200 OK");
+}
+
 export async function add(user) {
     const init = {
         method: "POST",
