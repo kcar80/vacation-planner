@@ -1,10 +1,16 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import LoginContext from "./contexts/LoginContext";
 import Fail from "./components/Fail";
 import MainPage from "./MainPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import AdminTools from "./components/AdministratorTools/AdminTools";
+import UserForm from "./components/AdministratorTools/UserForm";
+import UserConfirmDelete from "./components/AdministratorTools/UserConfirmDelete";
+import LocationConfirmDelete from "./components/AdministratorTools/LocationConfirmDelete";
+import LocationForm from "./components/AdministratorTools/LocationForm";
+import Nav from "./components/Nav";
 
 
 function App() {
@@ -29,7 +35,23 @@ function App() {
   return (<div className="container">
     <LoginContext.Provider value={{ ...credentials, afterAuth, logout }}>
         <Router>
+          <Nav/>
           <Switch>
+          <Route path={["/admintools/user/edit/:id", "/admintools/user/add"]}>
+            {credentials ? <UserForm/> : <Redirect to="/login" />}
+          </Route>
+          <Route path={["/admintools/user/delete/:id"]}>
+            {credentials ? <UserConfirmDelete/> : <Redirect to="/login" />}
+          </Route>
+          <Route path={["/admintools/location/edit/:id", "/admintools/location/add"]}>
+            {credentials ? <LocationForm/> : <Redirect to="/login" />}
+          </Route>
+          <Route path={["/admintools/location/delete/:id"]}>
+            {credentials ? <LocationConfirmDelete/> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/admintools">
+            <AdminTools />
+          </Route>
           <Route path="/register">
             <Register />
           </Route>

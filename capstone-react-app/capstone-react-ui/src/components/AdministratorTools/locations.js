@@ -1,6 +1,6 @@
 const url = "http://localhost:8080/api/location";
 
-export async function findAll() {
+export async function findAllLocations() {
     const response = await fetch(url);
     if (response.status === 200) {
         return await response.json();
