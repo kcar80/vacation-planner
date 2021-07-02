@@ -1,25 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
-import { findVacationsByUser, findLocationById } from "../../services/UserServices";
+import { findVacationsByUser, findLocationById } from "../services/users";
 import { Link } from "react-router-dom";
+import LoginContext from ".../contexts/LoginContext";
+import { findByUsername } from "../../services/users";
+import emptyUser from "../../services/User";
 
 const passwordType = {
     HIDDEN: "password",
     SHOWN: "text"
 }
 
-function Profile({ user }) {
+function Profile() {
 
     const [passwordState, setPasswordState] = useState(passwordType.HIDDEN);
+    const [username, logout] = useContext(LoginContext);
+    const [user, setUser] = useState(emptyUser);
     const [vacations, setVacations] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
-        findVacationsByUser(user.userId)
-            .then(setVacations)
-            //.catch(() => history.push("/failure"));
+        findByUsername(username)
+            .then(setUser)
+            .catch(() => history.push("/failure"));
     }, [history]);
 
+    useEffect(() => {
+        findVacationsByUser(user.userId)
+            .then(setVacations)
+            .catch(() => history.push("/failure"));
+    }, [history]);
+
+    
     const changePasswordState = evt => {
         if (passwordState === passwordType.HIDDEN) {
             setPasswordState(passwordType.SHOWN);
