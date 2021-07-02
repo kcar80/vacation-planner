@@ -21,7 +21,7 @@ function Nav(){
             : <Link to="/login" className="btn btn-light">Login</Link>}
           <Link to="/profile" className={`btn btn-primary${(username ? "": " disabled")}`}>Profile</Link>
           <Link to="/register" className={`btn btn-primary${(username ? " disabled": "")}`}>Register</Link>
-          {username==="admin" ? <Link to="/admin" className="btn btn-primary">Admin</Link> : <div></div>}
+          {username==="admin" ? <Link to="/admintools" className="btn btn-primary">Admin</Link> : <div></div>}
         </div>
 
     </div>
