@@ -1,25 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
-import { findVacationsByUser, findLocationById } from "../../services/UserServices";
+import { findById } from "../AdministratorTools/locations";
 import { Link } from "react-router-dom";
+import { findByUsername } from "../../services/users";
+import emptyUser from "../../services/User";
 
 const passwordType = {
     HIDDEN: "password",
     SHOWN: "text"
 }
 
-function Profile({ user }) {
+function Profile({ username }) {
 
     const [passwordState, setPasswordState] = useState(passwordType.HIDDEN);
+    const [user, setUser] = useState(emptyUser);
     const [vacations, setVacations] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
-        findVacationsByUser(user.userId)
-            .then(setVacations)
-            //.catch(() => history.push("/failure"));
+        findByUsername(username)
+            .then(setUser)
+            .catch(() => history.push("/failure"));
     }, [history]);
 
+    // useEffect(() => {
+    //     findVacationsByUser(user.userId)
+    //         .then(setVacations)
+    //         .catch(() => history.push("/failure"));
+    // }, [history]);
+
+    
     const changePasswordState = evt => {
         if (passwordState === passwordType.HIDDEN) {
             setPasswordState(passwordType.SHOWN);
@@ -59,7 +69,7 @@ function Profile({ user }) {
                     {v.locations.map(l => 
                         <li>
                             <div className="row">
-                                <div className="col">{findLocationById(l.locationId)}</div>
+                                <div className="col">{findById(l.locationId)}</div>
                                 <div className="col">{l.startDate}</div>
                                 <div className="col">{l.endDate}</div>
                             </div>

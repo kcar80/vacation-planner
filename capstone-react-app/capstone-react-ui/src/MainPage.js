@@ -1,7 +1,6 @@
-import { useContext, useRef, useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import LoginContext from "./contexts/LoginContext";
-import mapboxgl from "mapbox-gl";
+import { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import mapboxgl from 'mapbox-gl';
  
 mapboxgl.accessToken = 
 'pk.eyJ1Ijoicm9iYmU4NyIsImEiOiJja3FtajIzY2owODFzMnZtem02OTJndjF3In0.xekIFGpFViXp6WPMgmSyhg';
@@ -13,9 +12,6 @@ function MainPage() {
   const [lng, setLng] = useState(-96.4);
   const [lat, setLat] = useState(38.8);
   const [zoom, setZoom] = useState(3.86);
-
-  const { username, logout } = useContext(LoginContext);
-  const history = useHistory();
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -36,21 +32,11 @@ function MainPage() {
     });
   });
 
-  const handleLogout = () => {
-    logout();
-    history.push("/");
-  };
-
   return (<div className="row align-items-center">
-        <h1 className="col">Trip Advisory Plus</h1>
-
-        <div>
-        {username ? <p>Welcome {username} to Trip Advisory Plus!</p> : <p>Welcome to Trip Advisory Plus!</p>}
-        </div>
         <div class="input-group">
           <input type="search" class="form-control rounded" placeholder="Search for a location" aria-label="Search"
             aria-describedby="search-addon" />
-          <Link to="/" type="button" className="btn btn-outline-primary">search</Link>
+          <Link to="/" type="button" className="btn btn-primary">search</Link>
         </div>
         <div className="container">
           <div ref={mapContainer} className="map-container" />

@@ -63,7 +63,7 @@ function App() {
             <Login />
           </Route>
           <Route path="/profile">
-            <Profile />
+            <Profile username={username}/>
           </Route>
           <Route path="/failure">
             <Fail />
