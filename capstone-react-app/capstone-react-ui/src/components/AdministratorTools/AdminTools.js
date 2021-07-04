@@ -25,6 +25,10 @@ function AdminTools(){
     }, [history]);
 
     return(
+        <>
+        <div className="col d-flex justify-content-end">
+          <Link to="/admintools/location/add" className={`btn btn-primary m-1${(username ? " disabled": "")}`}>Add a Location</Link>
+        </div>
 
         <div className="d-md-flex h-md-100 align-items-center">
 
@@ -74,8 +78,8 @@ function AdminTools(){
     </div>
         
 </div>
+</>
     )
-
 
     }
 

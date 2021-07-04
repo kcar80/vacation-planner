@@ -18,9 +18,9 @@ function Nav(){
         
         <div className="col d-flex justify-content-end">
           {username ? <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
-            : <Link to="/login" className="btn btn-light">Login</Link>}
-          <Link to="/profile" className={`btn btn-primary${(username ? "": " disabled")}`}>Profile</Link>
-          <Link to="/register" className={`btn btn-primary${(username ? " disabled": "")}`}>Register</Link>
+            : <Link to="/login" className="btn btn-light m-1">Login</Link>}
+          <Link to="/profile" className={`btn btn-primary m-1${(username ? "": " disabled")}`}>Profile</Link>
+          <Link to="/register" className={`btn btn-primary m-1${(username ? " disabled": "")}`}>Register</Link>
           {username==="admin" ? <Link to="/admintools" className="btn btn-primary">Admin</Link> : <div></div>}
         </div>
 
