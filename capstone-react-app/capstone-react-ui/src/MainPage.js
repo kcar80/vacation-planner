@@ -1,7 +1,7 @@
 import { useContext, useRef, useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import LoginContext from "./contexts/LoginContext";
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from "mapbox-gl";
  
 mapboxgl.accessToken = 
 'pk.eyJ1Ijoicm9iYmU4NyIsImEiOiJja3FtajIzY2owODFzMnZtem02OTJndjF3In0.xekIFGpFViXp6WPMgmSyhg';
