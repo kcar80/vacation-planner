@@ -66,7 +66,7 @@ function App() {
             <Login />
           </Route>
           <Route path="/profile">
-            <Profile username={username}/>
+            <Profile username={credentials.username}/>
           </Route>
           <Route path="/failure">
             <Fail />
