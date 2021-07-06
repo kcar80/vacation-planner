@@ -3,8 +3,7 @@ import { useHistory, useParams } from "react-router";
 import { findByDescription } from "../../services/locations";
 import { emptyLocation } from "../../services/data";
 import ReactMapGL, {Marker} from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import mapicon from './map-marker.png';
+import Icon from "./city-pin";
 
 function Location() {
 
@@ -15,9 +14,7 @@ function Location() {
     const [viewport, setViewport] = useState({
         latitude: 38.8,
         longitude: -96.4,
-        zoom: 3.86,
-        bearing: 0,
-        pitch: 0,
+        zoom: 3.86
       });
 
     useEffect(() => {
@@ -45,7 +42,7 @@ function Location() {
                 onViewportChange={nextViewport => setViewport(nextViewport)}
                 mapboxApiAccessToken={`pk.eyJ1Ijoicm9iYmU4NyIsImEiOiJja3FtajIzY2owODFzMnZtem02OTJndjF3In0.xekIFGpFViXp6WPMgmSyhg`}>
                 <Marker latitude={location.latitude} longitude={location.longitude}>
-                    <img src={mapicon} alt="map icon" />
+                    <Icon />
                 </Marker>
             </ReactMapGL>
         </div>

@@ -58,11 +58,13 @@ export async function update(location) {
     }
 }
 
-export async function deleteById(locationId) {
-const init = {
-        method: "DELETE"
+export async function deleteById(locationId, jwt) {
+    const init = {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${jwt}`
+        }
     }
-
     const response = await fetch(`${url}/${locationId}`, init);
     if (response.status !== 204) {
         return Promise.reject("not 204 No Content");

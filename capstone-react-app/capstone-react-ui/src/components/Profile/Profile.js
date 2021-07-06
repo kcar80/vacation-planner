@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
+import LoginContext from "../../contexts/LoginContext";
 import { useHistory } from "react-router";
 import { findById } from "../../services/locations";
 import { Link } from "react-router-dom";
-import { findByUsername } from "../../services/users";
+import { findByUsername, findVacationsByUser } from "../../services/users";
 import { emptyUser } from "../../services/data";
+import { findVacationsByUser } from "../../services/vacations";
 
 const passwordType = {
     HIDDEN: "password",
     SHOWN: "text"
 }
 
-function Profile({ username }) {
+function Profile() {
 
     const [passwordState, setPasswordState] = useState(passwordType.HIDDEN);
     const [user, setUser] = useState(emptyUser);
+    const {username} = useContext(LoginContext);
     const [vacations, setVacations] = useState([]);
     const history = useHistory();
 
@@ -23,11 +26,10 @@ function Profile({ username }) {
             .catch(() => history.push("/failure"));
     }, [username, history]);
 
-    // useEffect(() => {
-    //     findVacationsByUser(user.userId)
-    //         .then(setVacations)
-    //         .catch(() => history.push("/failure"));
-    // }, [history]);
+    useEffect(() => {
+        findVacationsByUser(user.userId)
+            .then(setVacations)
+    }, [history]);
 
     
     const changePasswordState = evt => {
@@ -54,7 +56,7 @@ function Profile({ username }) {
         <div className="form-group row">
             <div className="col-sm-2">Password:</div>
             <div className="col-md-auto">
-                <input type={passwordState} readonly className="form-control-plaintext form-control-sm" id="password" value={user.password}/>
+                <input type={passwordState} readOnly className="form-control-plaintext form-control-sm" id="password" value={user.password}/>
             </div>
             <button className="col-md-auto btn btn-sm btn-outline-secondary" onClick={changePasswordState}>hide/show</button>
         </div>

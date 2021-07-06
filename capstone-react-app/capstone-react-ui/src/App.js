@@ -13,6 +13,7 @@ import LocationForm from "./components/AdministratorTools/LocationForm";
 import Nav from "./components/Nav";
 import Location from "./components/Location/Location";
 import Profile from "./components/Profile/Profile";
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 function App() {
   const [credentials, setCredentials] = useState({
@@ -58,9 +59,6 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
-          </Route>
-          <Route path="/profile">
-            <Profile username={credentials.username}/>
           </Route>
           <Route path="/failure">
             <Fail />
