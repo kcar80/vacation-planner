@@ -8,12 +8,12 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/api/user HTTP/1.1
+GET http://localhost:8080/api/user/ HTTP/1.1
 
 
 ###
 
-GET http://localhost:8080/api/location HTTP/1.1
+GET http://localhost:8080/api/location/1 HTTP/1.1
 
 ###
-GET http://localhost:8080/api/vacation HTTP/1.1
+GET http://localhost:8080/api/vacation/ HTTP/1.1
