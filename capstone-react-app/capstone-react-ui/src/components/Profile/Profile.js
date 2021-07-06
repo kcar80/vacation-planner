@@ -3,7 +3,7 @@ import LoginContext from "../../contexts/LoginContext";
 import { useHistory } from "react-router";
 import { findById } from "../../services/locations";
 import { Link } from "react-router-dom";
-import { findByUsername, findVacationsByUser } from "../../services/users";
+import { findByUsername } from "../../services/users";
 import { emptyUser } from "../../services/data";
 import { findVacationsByUser } from "../../services/vacations";
 

@@ -54,6 +54,12 @@ function App() {
           <Route path="/admintools">
           {credentials && credentials.username==="admin" ? <AdminTools/> : <Redirect to="/login" />}
           </Route>
+          <Route path="/location/:description">
+            <Location />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
           <Route path="/register">
             <Register />
           </Route>
