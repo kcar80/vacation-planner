@@ -5,6 +5,7 @@ import { findById } from "../../services/locations";
 import { Link } from "react-router-dom";
 import { findByUsername, findVacationsByUser } from "../../services/users";
 import { emptyUser } from "../../services/data";
+import { findVacationsByUser } from "../../services/vacations";
 
 const passwordType = {
     HIDDEN: "password",
@@ -25,10 +26,10 @@ function Profile() {
             .catch(() => history.push("/failure"));
     }, [username, history]);
 
-    // useEffect(() => {
-    //     findVacationsByUser(user.userId)
-    //         .then(setVacations)
-    // }, [history]);
+    useEffect(() => {
+        findVacationsByUser(user.userId)
+            .then(setVacations)
+    }, [history]);
 
     
     const changePasswordState = evt => {

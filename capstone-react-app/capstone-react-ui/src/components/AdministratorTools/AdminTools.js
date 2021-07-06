@@ -24,7 +24,10 @@ function AdminTools(){
             .catch(() => history.push("./failure"));
     }, [history]);
 
-    return(
+    return(<div>
+        <div className="col d-flex justify-content-end">
+          <Link to="/admintools/location/add" className={`btn btn-primary m-1`}>Add a Location</Link>
+        </div>
 
         <div className="d-md-flex h-md-100 align-items-center">
             <div className="col-md-6">
@@ -59,7 +62,7 @@ function AdminTools(){
                 </div>)}
             </div>
         </div>
-    );
+    </div>);
 }
 
 

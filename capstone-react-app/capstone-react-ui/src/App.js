@@ -40,25 +40,19 @@ function App() {
           <Nav/>
           <Switch>
           <Route path={["/admintools/user/edit/:id", "/admintools/user/add"]}>
-            {credentials.username ? <UserForm/> : <Redirect to="/login" />}
+            {credentials && credentials.username==="admin" ? <UserForm/> : <Redirect to="/login" />}
           </Route>
           <Route path={["/admintools/user/delete/:id"]}>
-            {credentials.username ? <UserConfirmDelete/> : <Redirect to="/login" />}
+            {credentials && credentials.username==="admin" ? <UserConfirmDelete/> : <Redirect to="/login" />}
           </Route>
           <Route path={["/admintools/location/edit/:id", "/admintools/location/add"]}>
-            {credentials.username ? <LocationForm/> : <Redirect to="/login" />}
+            {credentials && credentials.username==="admin" ? <LocationForm/> : <Redirect to="/login" />}
           </Route>
           <Route path={["/admintools/location/delete/:id"]}>
-            {credentials.username ? <LocationConfirmDelete/> : <Redirect to="/login" />}
+            {credentials && credentials.username==="admin" ? <LocationConfirmDelete/> : <Redirect to="/login" />}
           </Route>
           <Route path="/admintools">
-            {credentials.username ? <AdminTools/> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/location/:description">
-            <Location />
-          </Route>
-          <Route path="/profile">
-            {credentials.username ? <Profile/> : <Redirect to="/login" />}
+          {credentials && credentials.username==="admin" ? <AdminTools/> : <Redirect to="/login" />}
           </Route>
           <Route path="/register">
             <Register />
