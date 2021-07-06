@@ -1,4 +1,5 @@
 const url = "http://localhost:8080/api/user";
+const forbidden = "forbidden";
 
 export async function findAllUsers() {
     const response = await fetch(url);
@@ -42,11 +43,17 @@ export async function add(user) {
 }
 
 export async function update(user) {
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+        return Promise.reject(forbidden);
+    }
+  
     const init = {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": `Bearer ${jwt}`
         },
         body: JSON.stringify(user)
     }
@@ -56,7 +63,12 @@ export async function update(user) {
     }
 }
 
-export async function deleteById(userId, jwt) {
+export async function deleteById(userId) {
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+        return Promise.reject(forbidden);
+    }
+    
     const init = {
         method: "DELETE",
         headers: {
