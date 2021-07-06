@@ -29,7 +29,7 @@ function Profile() {
     useEffect(() => {
         findVacationsByUser(user.userId)
             .then(setVacations)
-    }, [history]);
+    }, [history, user.userId]);
 
     
     const changePasswordState = evt => {
@@ -71,7 +71,7 @@ function Profile() {
                     {v.locations.map(l => 
                         <li>
                             <div className="row">
-                                <div className="col">{findById(l.locationId)}</div>
+                                <div className="col">{findById(l.locationId).description}</div>
                                 <div className="col">{l.startDate}</div>
                                 <div className="col">{l.endDate}</div>
                             </div>
