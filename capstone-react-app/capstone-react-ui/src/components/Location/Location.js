@@ -3,7 +3,6 @@ import { useHistory, useParams } from "react-router";
 import { findByDescription } from "../../services/locations";
 import { emptyLocation } from "../../services/data";
 import ReactMapGL, {Marker} from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import mapicon from './map-marker.png';
 
 function Location() {

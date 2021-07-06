@@ -4,6 +4,7 @@ import { findById } from "../../services/locations";
 import { Link } from "react-router-dom";
 import { findByUsername } from "../../services/users";
 import { emptyUser } from "../../services/data";
+import { findVacationsByUser } from "../../services/vacations";
 
 const passwordType = {
     HIDDEN: "password",
@@ -23,11 +24,10 @@ function Profile({ username }) {
             .catch(() => history.push("/failure"));
     }, [username, history]);
 
-    // useEffect(() => {
-    //     findVacationsByUser(user.userId)
-    //         .then(setVacations)
-    //         .catch(() => history.push("/failure"));
-    // }, [history]);
+    useEffect(() => {
+        findVacationsByUser(user.userId)
+            .then(setVacations)
+    }, [history]);
 
     
     const changePasswordState = evt => {
@@ -54,7 +54,7 @@ function Profile({ username }) {
         <div className="form-group row">
             <div className="col-sm-2">Password:</div>
             <div className="col-md-auto">
-                <input type={passwordState} readonly className="form-control-plaintext form-control-sm" id="password" value={user.password}/>
+                <input type={passwordState} readOnly className="form-control-plaintext form-control-sm" id="password" value={user.password}/>
             </div>
             <button className="col-md-auto btn btn-sm btn-outline-secondary" onClick={changePasswordState}>hide/show</button>
         </div>
