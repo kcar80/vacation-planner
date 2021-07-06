@@ -7,7 +7,9 @@ use vacation_app_test;
 -- create location
 create table location (
 	location_id int primary key auto_increment,
-	description varchar(50) not null
+	description varchar(50) not null,
+    latitude float(10, 6) not null,
+    longitude float(10, 6) not null
 );
 
 -- create vacation
@@ -100,14 +102,15 @@ begin
 	
 	-- location inserts
 	insert into location
-		(location_id, description)
-	values
-		(1, 'St.Paul, MN'),
-		(2, 'Madison, WI'),
-		(3, 'Orlando, FL'),
-		(4, 'New York, NY'),
-		(5, 'Los Angeles, CA'),
-		(6, 'Honolulu, HI');
+	(location_id, description, latitude, longitude)
+values
+	(1, 'St.Paul, MN', 44.9537, -93.0900),
+	(2, 'Madison, WI', 43.0731, -89.4012),
+	(3, 'Orlando, FL', 28.5383, -81.3792),
+	(4, 'New York, NY', 40.7128, -74.0060),
+	(5, 'Los Angeles, CA', 34.0522, -118.2437),
+	(6, 'Honolulu, HI', 21.3069, -157.8583);
+
 
 	-- user inserts
 	insert into user

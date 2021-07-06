@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { register } from "../services/auth";
-import emptyUser from "../services/User";
+import { emptyUser } from "../services/data";
 import { add } from "../services/users";
 
 function Register() {

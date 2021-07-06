@@ -23,6 +23,10 @@ public class LocationService {
         return repository.findById(locationId);
     }
 
+    public Location findByDescription (String description) {
+        return repository.findByDescription(description);
+    }
+
    public Result<Location> add(Location location) {
         Result<Location> result = validate(location);
         if (!result.isSuccess()) {

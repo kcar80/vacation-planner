@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
-
-import { findById, deleteById } from "./locations" 
+import { findById, deleteById } from "../../services/locations";
 
 function LocationConfirmDelete() {
 
     const [location, setLocation] = useState({ description: "" });
-    const [message, setMessage] = useState();
     const history = useHistory();
     const { id } = useParams();
 
@@ -14,17 +12,20 @@ function LocationConfirmDelete() {
         if (id) {
             findById(id)
                 .then(l => setLocation(l))
-                .catch(() => setMessage("Unable to find location."));
+                .catch(() => history.push("/failure"));
         }
     }, [history, id]);
 
     const yesDelete = () => {
         deleteById(location.locationId)
-            .then(() => history.push("/"))
-            .catch(() => setMessage("Delete failed."));
+            .then(() => history.push("/admintools"))
+            .catch(() => history.push("/failure"));
     };
 
-    const cancel = () => history.push("/");
+    const cancel = evt => {
+        evt.preventDefault();
+        history.push("/admintools");
+    };
 
     return (
         <div>

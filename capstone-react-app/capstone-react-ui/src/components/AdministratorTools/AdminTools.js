@@ -2,8 +2,8 @@ import LoginContext from "../../contexts/LoginContext";
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import {findAllUsers} from "./users";
-import {findAllLocations} from "./locations"
+import {findAllUsers} from "../../services/users";
+import {findAllLocations} from "../../services/locations"
 
 function AdminTools(){
 

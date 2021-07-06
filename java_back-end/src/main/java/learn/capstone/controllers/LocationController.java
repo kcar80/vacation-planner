@@ -25,9 +25,14 @@ public class LocationController {
         return service.findAll();
     }
 
-    @GetMapping("/{locationId}")
+    @GetMapping("/id/{locationId}")
     public Location findById(@PathVariable int locationId) {
         return service.findById(locationId);
+    }
+
+    @GetMapping("/description/{description}")
+    public Location findByDescription (@PathVariable String description) {
+        return service.findByDescription(description);
     }
 
     @PostMapping

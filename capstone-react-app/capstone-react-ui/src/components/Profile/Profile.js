@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
-import { findById } from "../AdministratorTools/locations";
+import { findById } from "../../services/locations";
 import { Link } from "react-router-dom";
 import LoginContext from "../../contexts/LoginContext";
 import { findByUsername } from "../../services/users";
-import emptyUser from "../../services/User";
+import { emptyUser } from "../../services/data";
 
 const passwordType = {
     HIDDEN: "password",
@@ -23,7 +23,7 @@ function Profile() {
         findByUsername(username)
             .then(setUser)
             .catch(() => history.push("/failure"));
-    }, [history]);
+    }, [username, history]);
 
     // useEffect(() => {
     //     findVacationsByUser(user.userId)

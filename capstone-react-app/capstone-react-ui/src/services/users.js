@@ -1,7 +1,15 @@
 const url = "http://localhost:8080/api/user";
 
+export async function findAllUsers() {
+    const response = await fetch(url);
+    if (response.status === 200) {
+        return await response.json();
+    }
+    return Promise.reject("not 200 OK");
+}
+
 export async function findById(userId) {
-    const response = await fetch(`${url}/${userId}`);
+    const response = await fetch(`${url}/id/${userId}`);
     if (response.status === 200) {
         return await response.json();
     }
@@ -9,7 +17,7 @@ export async function findById(userId) {
 }
 
 export async function findByUsername(username) {
-    const response = await fetch(`${url}/${username}`);
+    const response = await fetch(`${url}/username/${username}`);
     if (response.status === 200) {
         return await response.json();
     }

@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
-
-import { findById, deleteById } from "./users" 
+import { findById, deleteById } from "../../services/users";
 
 function UserConfirmDelete() {
 
     const [user, setUser] = useState({ firstName: "" });
-    const [message, setMessage] = useState();
     const history = useHistory();
     const { id } = useParams();
 
@@ -14,17 +12,20 @@ function UserConfirmDelete() {
         if (id) {
             findById(id)
                 .then(u => setUser(u))
-                .catch(() => setMessage("Unable to find user."));
+                .catch(() => history.push("/failure"));
         }
     }, [history, id]);
 
     const yesDelete = () => {
         deleteById(user.userId)
-            .then(() => history.push("/"))
-            .catch(() => setMessage("Delete failed."));
+            .then(() => history.push("/admintools"))
+            .catch(() => history.push("/failure"));
     };
 
-    const cancel = () => history.push("/");
+    const cancel = evt => {
+        evt.preventDefault();
+        history.push("/admintools");
+    };
 
     return (
         <div>

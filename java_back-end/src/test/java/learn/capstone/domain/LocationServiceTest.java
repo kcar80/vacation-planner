@@ -57,6 +57,8 @@ class LocationServiceTest {
         Location local = new Location();
         local.setLocationId(1);
         local.setDescription(null);
+        local.setLatitude(10);
+        local.setLongitude(10);
 
         when(repository.add(expected)).thenReturn(location);
 
@@ -73,6 +75,8 @@ class LocationServiceTest {
         Location local = new Location();
         local.setLocationId(1);
         local.setDescription("Updated Test");
+        local.setLatitude(10);
+        local.setLongitude(10);
 
         when(repository.add(expected)).thenReturn(location);
 
@@ -111,6 +115,8 @@ class LocationServiceTest {
         Location location = new Location();
         location.setLocationId(1);
         location.setDescription("Test Location");
+        location.setLatitude(0);
+        location.setLongitude(0);
         return location;
     }
 }

@@ -13,6 +13,8 @@ public class LocationMapper implements RowMapper<Location> {
         Location location = new Location();
         location.setLocationId(resultSet.getInt("location_id"));
         location.setDescription(resultSet.getString("description"));
+        location.setLatitude(resultSet.getFloat("latitude"));
+        location.setLongitude(resultSet.getFloat("longitude"));
         return location;
     }
 }

@@ -65,6 +65,8 @@ public class LocationJdbcTemplateRepositoryTest {
     private Location makeLocation() {
         Location location = new Location();
         location.setDescription("Test Location");
+        location.setLatitude(10);
+        location.setLongitude(10);
         return location;
     }
 }

@@ -23,7 +23,7 @@ public class LocationJdbcTemplateRepository implements LocationRepository {
 
     @Override
     public List<Location> findAll() {
-        final String sql = "select location_id, description "
+        final String sql = "select location_id, description, latitude, longitude "
                 + "from location limit 1000;";
         return jdbcTemplate.query(sql, new LocationMapper());
     }
@@ -31,7 +31,7 @@ public class LocationJdbcTemplateRepository implements LocationRepository {
     @Override
     @Transactional
     public Location findById(int locationId) {
-        final String sql = "select location_id, description "
+        final String sql = "select location_id, description, latitude, longitude  "
                 + "from location "
                 + "where location_id = ?;";
 
@@ -42,14 +42,28 @@ public class LocationJdbcTemplateRepository implements LocationRepository {
     }
 
     @Override
+    public Location findByDescription(String description) {
+        final String sql = "select location_id, description, latitude, longitude "
+                + "from location "
+                + "where description = ?;";
+
+        Location location = jdbcTemplate.query(sql, new LocationMapper(), description).stream()
+                .findFirst().orElse(null);
+
+        return location;
+    }
+
+    @Override
     public Location add(Location location) {
-        final String sql = "insert into location (description) "
-                + " value (?);";
+        final String sql = "insert into location (description,latitude,longitude) "
+                + " value (?,?,?);";
 
        KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, location.getDescription());
+            ps.setFloat(2, location.getLatitude());
+            ps.setFloat(3, location.getLongitude());
             return ps;
         }, keyHolder);
 
@@ -65,11 +79,15 @@ public class LocationJdbcTemplateRepository implements LocationRepository {
     public boolean update(Location location) {
 
         final String sql = "update location set "
-                + "description = ? "
+                + "description = ?, "
+                + "latitude = ?, "
+                + "longitude = ? "
                 + "where location_id = ?;";
 
         return jdbcTemplate.update(sql,
                 location.getDescription(),
+                location.getLatitude(),
+                location.getLongitude(),
                 location.getLocationId()) > 0;
     }
 

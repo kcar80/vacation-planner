@@ -10,6 +10,8 @@ public interface LocationRepository {
 
     Location findById(int locationId);
 
+    Location findByDescription(String description);
+
     Location add(Location location);
 
     boolean update(Location location);
