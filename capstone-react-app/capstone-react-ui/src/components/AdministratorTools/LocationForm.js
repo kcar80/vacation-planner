@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
-import { emptyLocation } from "./data";
-import {findById, add, update} from "./locations"
+import { emptyLocation } from "../../services/data";
+import {findById, add, update} from "../../services/locations";
 
 function LocationForm(){
     const[location, setLocation] = useState(emptyLocation);
@@ -26,16 +26,14 @@ function LocationForm(){
     const onSubmit = evt => {
         evt.preventDefault();
         (location.locationId > 0 ? update(location) : add(location))
-            .then(() => history.push("/"))
+            .then(() => history.push("/admintools"))
             .catch();
     };
 
     const cancel = evt => {
         evt.preventDefault();
-        history.push("/");
+        history.push("/admintools");
     };
-
-
 
     return (
         <form onSubmit={onSubmit}>
@@ -45,7 +43,18 @@ function LocationForm(){
                 <input type="text" className="form-control" id="description" name="description"
                     value={location.description} onChange={onChange} required />
             </div>
-        
+
+            <div className="form-group">
+                <label htmlFor="latitude">Latitude</label>
+                <input type="text" className="form-control" id="latitude" name="latitude"
+                    value={location.latitude} onChange={onChange} required />
+            </div>
+
+            <div className="form-group">
+                <label htmlFor="longitude">Longitude</label>
+                <input type="text" className="form-control" id="longitude" name="longitude"
+                    value={location.longitude} onChange={onChange} required />
+            </div>
             
             <div className="form-group">
                 <button type="submit" className="btn btn-primary me-2">Save</button>

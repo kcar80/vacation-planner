@@ -117,7 +117,7 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
 
     private void addLocations(Vacation vacation){
         final String sql = "select vs.vacation_id, vs.location_id, vs.start_date, "
-                +" vs.end_date, vs.identifier, l.description "
+                +" vs.end_date, vs.identifier, l.description, l.latitude, l.longitude "
                 + "from vacation_stops vs "
                 + "inner join location l on vs.location_id = l.location_id "
                 + "where vs.vacation_id = ?;";

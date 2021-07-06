@@ -5,17 +5,14 @@ import Fail from "./components/Fail";
 import MainPage from "./MainPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
-
 import AdminTools from "./components/AdministratorTools/AdminTools";
 import UserForm from "./components/AdministratorTools/UserForm";
 import UserConfirmDelete from "./components/AdministratorTools/UserConfirmDelete";
 import LocationConfirmDelete from "./components/AdministratorTools/LocationConfirmDelete";
 import LocationForm from "./components/AdministratorTools/LocationForm";
 import Nav from "./components/Nav";
-
+import Location from "./components/Location/Location";
 import Profile from "./components/Profile/Profile";
-
-
 
 function App() {
   const [credentials, setCredentials] = useState({

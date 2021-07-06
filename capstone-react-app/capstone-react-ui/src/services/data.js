@@ -1,13 +1,15 @@
 export const emptyLocation = {
     locationId: 0,
-    description: ""
+    description: "",
+    latitude: 0,
+    longitude: 0
 };
 
 export const emptyUser = {
-    id: 0,
+    userId: 0,
     firstName: "",
     lastName: "",
-    userName: "",
+    username: "",
     password: "",
-    userType: "true"
+    userType: true
 };

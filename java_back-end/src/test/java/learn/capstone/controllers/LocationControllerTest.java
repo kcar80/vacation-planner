@@ -37,8 +37,8 @@ public class LocationControllerTest {
     @Test
     void shouldGetAll() throws Exception {
         List<Location> locations = List.of(
-                new Location(1, "St.Paul, MN"),
-                new Location(2, "Minneapolis, MN")
+                new Location(1, "St.Paul, MN", 44.9537f, -93.0900f),
+                new Location(2, "Minneapolis, MN", 44.9778f, -93.2650f)
         );
 
         ObjectMapper jsonMapper = new ObjectMapper();
@@ -54,8 +54,8 @@ public class LocationControllerTest {
 
     @Test
     void shouldAdd() throws Exception {
-        Location expected = new Location(0, "St.Cloud,MN");
-        Location actual = new Location(1, "St.Cloud,MN");
+        Location expected = new Location(0, "St.Cloud,MN", 45.5579f, -94.1632f);
+        Location actual = new Location(1, "St.Cloud,MN", 45.5579f, -94.1632f);
 
         Result<Location> result = new Result<>();
         result.setPayload(actual);
@@ -78,7 +78,7 @@ public class LocationControllerTest {
     // error giving null pointer
     @Test
     void shouldNotAddNull() throws Exception {
-        Location toAdd = new Location(0, " ");
+        Location toAdd = new Location(0, " ", 0, 0);
 
         Result<Location> result = new Result<>();
         result.addMessage("invalid name", ResultType.INVALID);
@@ -101,7 +101,7 @@ public class LocationControllerTest {
 
     @Test
     void shouldUpdate() throws Exception {
-        Location expected = new Location(1, "St.Cloud,MN");
+        Location expected = new Location(1, "St.Cloud,MN", 45.5579f, -94.1632f);
 
         Result<Location> result = new Result<>();
         result.setPayload(expected);
@@ -118,7 +118,7 @@ public class LocationControllerTest {
 
     @Test
     void shouldNotUpdate() throws Exception {
-        Location expected = new Location(1000, "St.Cloud,MN");
+        Location expected = new Location(1000, "St.Cloud,MN", 45.5579f, -94.1632f);
 
         Result<Location> result = new Result<>();
         result.addMessage("update failed", ResultType.INVALID);
@@ -135,7 +135,7 @@ public class LocationControllerTest {
 
     @Test
     void shouldDelete() throws Exception {
-        Location expected = new Location(1, "St.Cloud,MN");
+        Location expected = new Location(1, "St.Cloud,MN", 45.5579f, -94.1632f);
 
         Result<Location> result = new Result<>();
         result.isSuccess();
@@ -152,7 +152,7 @@ public class LocationControllerTest {
 
     @Test
     void shouldNotDelete() throws Exception {
-        Location expected = new Location(1000, "St.Cloud,MN");
+        Location expected = new Location(1000, "St.Cloud,MN", 45.5579f, -94.1632f);
 
         Result<Location> result = new Result<>();
         result.addMessage("delete failed", ResultType.INVALID);

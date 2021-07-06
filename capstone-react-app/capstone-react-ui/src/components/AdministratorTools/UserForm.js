@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
-import { emptyUser } from "./data";
+import { emptyUser } from "../../services/data";
 import {findById, add, update} from "../../services/users"
 
 function UserForm(){
@@ -26,13 +26,13 @@ function UserForm(){
     const onSubmit = evt => {
         evt.preventDefault();
         (user.userId > 0 ? update(user) : add(user))
-            .then(() => history.push("/"))
+            .then(() => history.push("/admintools"))
             .catch();
     };
 
     const cancel = evt => {
         evt.preventDefault();
-        history.push("/");
+        history.push("/admintools");
     };
 
 
