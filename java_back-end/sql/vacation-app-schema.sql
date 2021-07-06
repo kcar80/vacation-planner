@@ -97,9 +97,7 @@ values
 insert into user
 	(user_id, first_name, last_name, user_name, password, user_type)
 values
-	(1, 'Robert', 'Entenmann', 'robb@gmail.com', 'robert123', 1),
-	(2, 'Killian', 'Carlsen-Phelan', 'killian@gmail.com', 'killian123', 0),
-	(3, 'Kathryn', 'Rowzee', 'kathryn@gmail.com', 'kathryn123', 1);
+	(1, 'admin', 'admin', 'admin', 'admin#123', 0);
 	
 -- vacation inserts
 insert into vacation
@@ -117,8 +115,8 @@ insert into comment
 	(comment_id, text, user_id, vacation_id)
 values
 	(1, 'Was a very boring and uneventful trip.', 1, 1),
-	(2, 'Had a blast and was a lot of fun.', 2, 3),
-	(3, 'Got to lay on the beach and relax.', 3, 6);
+	(2, 'Had a blast and was a lot of fun.', 1, 3),
+	(3, 'Got to lay on the beach and relax.', 1, 6);
 
 -- vacation_user inserts
 insert into vacation_user
@@ -129,7 +127,7 @@ select
 	concat(vacation.vacation_id, '-', user.user_id)
 from vacation
 inner join user
-where user.user_id in (1, 3)
+where user.user_id = 1
 and vacation.vacation_id != 2;
 
 -- vacation_stops inserts
