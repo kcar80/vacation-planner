@@ -16,4 +16,4 @@ GET http://localhost:8080/api/username/admin HTTP/1.1
 GET http://localhost:8080/api/location HTTP/1.1
 
 ###
-GET http://localhost:8080/api/vacation/vid/1 HTTP/1.1
+GET http://localhost:8080/api/vacation/ HTTP/1.1
