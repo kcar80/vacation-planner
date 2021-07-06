@@ -42,19 +42,19 @@ function App() {
           <Nav/>
           <Switch>
           <Route path={["/admintools/user/edit/:id", "/admintools/user/add"]}>
-            {credentials ? <UserForm/> : <Redirect to="/login" />}
+            {credentials && credentials.username==="admin" ? <UserForm/> : <Redirect to="/login" />}
           </Route>
           <Route path={["/admintools/user/delete/:id"]}>
-            {credentials ? <UserConfirmDelete/> : <Redirect to="/login" />}
+            {credentials && credentials.username==="admin" ? <UserConfirmDelete/> : <Redirect to="/login" />}
           </Route>
           <Route path={["/admintools/location/edit/:id", "/admintools/location/add"]}>
-            {credentials ? <LocationForm/> : <Redirect to="/login" />}
+            {credentials && credentials.username==="admin" ? <LocationForm/> : <Redirect to="/login" />}
           </Route>
           <Route path={["/admintools/location/delete/:id"]}>
-            {credentials ? <LocationConfirmDelete/> : <Redirect to="/login" />}
+            {credentials && credentials.username==="admin" ? <LocationConfirmDelete/> : <Redirect to="/login" />}
           </Route>
           <Route path="/admintools">
-            <AdminTools />
+          {credentials && credentials.username==="admin" ? <AdminTools/> : <Redirect to="/login" />}
           </Route>
           <Route path="/register">
             <Register />
@@ -63,7 +63,7 @@ function App() {
             <Login />
           </Route>
           <Route path="/profile">
-            <Profile username={username}/>
+            <Profile username={credentials.username}/>
           </Route>
           <Route path="/failure">
             <Fail />

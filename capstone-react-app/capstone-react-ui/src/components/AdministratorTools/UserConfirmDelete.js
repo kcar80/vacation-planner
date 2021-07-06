@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 
-import { findById, deleteById } from "./users" 
+import { findById, deleteById } from "../../services/users"
 
 function UserConfirmDelete() {
 

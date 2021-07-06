@@ -27,7 +27,7 @@ function AdminTools(){
     return(
         <>
         <div className="col d-flex justify-content-end">
-          <Link to="/admintools/location/add" className={`btn btn-primary m-1${(username ? " disabled": "")}`}>Add a Location</Link>
+          <Link to="/admintools/location/add" className={`btn btn-primary m-1`}>Add a Location</Link>
         </div>
 
         <div className="d-md-flex h-md-100 align-items-center">
@@ -42,7 +42,6 @@ function AdminTools(){
                 <div className="col">First Name</div>
                 <div className="col">Last Name</div>
                 <div className="col">Usename</div>
-                <div className="col">Password</div>
                 <div className="col">User Type</div>
                 <div className="col"></div>
             </div>
@@ -50,7 +49,6 @@ function AdminTools(){
                 <div className="col">{u.firstName}</div>
                 <div className="col">{u.lastName}</div>
                 <div className="col">{u.username}</div>
-                <div className="col">{u.passsword}</div>
                 <div className="col">{u.userType}</div>
                 <div className="col">
                 <Link to={`/admintools/user/delete/${u.userId}`} className="btn btn-danger me-2">Delete</Link>

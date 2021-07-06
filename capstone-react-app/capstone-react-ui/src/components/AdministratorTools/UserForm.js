@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 import { emptyUser } from "./data";
-import {findById, add, update} from "./users"
+import {findById, add, update} from "../../services/users"
 
 function UserForm(){
     const[user, setUser] = useState(emptyUser);
