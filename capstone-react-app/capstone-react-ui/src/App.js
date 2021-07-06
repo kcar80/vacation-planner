@@ -65,6 +65,9 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
+          <Route path="/profile">
+            <Profile username={username}/>
+          </Route>
           <Route path="/failure">
             <Fail />
           </Route>
