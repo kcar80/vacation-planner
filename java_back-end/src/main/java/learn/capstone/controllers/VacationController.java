@@ -27,12 +27,12 @@ public class VacationController {
         return service.findAll();
     }
 
-    @GetMapping("/{vacationId}")
+    @GetMapping("/id/{vacationId}")
     public Vacation findById(@PathVariable int vacationId){
         return service.findById(vacationId);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/userid/{userId}")
     public List<Vacation> findByUserId(@PathVariable int userId){
         return service.findByUserId(userId);
     }
