@@ -15,6 +15,7 @@ import Location from "./components/Location/Location";
 import Profile from "./components/Profile/Profile";
 import Vacation from "./components/Vacation/Vacation";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import VacationForm from "./components/Profile/VacationForm";
 
 function App() {
   const [credentials, setCredentials] = useState({
@@ -27,6 +28,8 @@ function App() {
     const secondDot = token.indexOf(".", firstDot + 1);
     const jwtBody = token.substring(firstDot + 1, secondDot);
     const body = JSON.parse(atob(jwtBody));
+
+    localStorage.setItem("jwt", token);
     setCredentials({
       username: body.sub,
       jwt: token
@@ -57,6 +60,9 @@ function App() {
           </Route>
           <Route path="/location/:description">
             <Location />
+          </Route>
+          <Route path={["/vacation/edit/:id", "/vacation/add"]}>
+          {credentials && credentials.username ? <VacationForm />  : <Redirect to="/login" />}
           </Route>
           <Route path="/profile">
           {credentials && credentials.username ? <Profile/> : <Redirect to="/login" />}
