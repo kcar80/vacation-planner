@@ -40,6 +40,13 @@ public class CommentJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByVacationId() {
+        List<Comment> comments = repository.findByVacationId(1);
+        assertNotNull(comments);
+        assertEquals(comments.get(0).getUserId(), 1);
+    }
+
+    @Test
     void shouldAdd() {
         Comment comment = makeComment();
         Comment actual = repository.add(comment);

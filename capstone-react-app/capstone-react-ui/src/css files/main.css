@@ -40,8 +40,8 @@ body {
 .hidden-link {
     text-decoration: none;
     color: black;
-    font-weight: bold;
-    font-size: xx-large;
+    text-decoration: underline;
+    font-weight: 560;
 }
 
 .hidden-link:hover {

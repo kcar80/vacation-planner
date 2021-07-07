@@ -42,6 +42,13 @@ public class CommentJdbcTemplateRepository implements CommentRepository {
     }
 
     @Override
+    public List<Comment> findByVacationId(int vacationId) {
+        final String sql = "select comment_id, text, user_id, vacation_id "
+                + "from comment where vacation_id = ?;";
+        return jdbcTemplate.query(sql, new CommentMapper(), vacationId);
+    }
+
+    @Override
     public Comment add(Comment comment) {
         final String sql = "insert into comment (text, user_id, vacation_id) "
                 + " value (?,?,?);";

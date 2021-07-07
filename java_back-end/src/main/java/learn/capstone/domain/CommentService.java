@@ -23,6 +23,10 @@ public class CommentService {
         return repository.findById(commentId);
     }
 
+    public List<Comment> findByVacationId(int vacationId) {
+        return repository.findByVacationId(vacationId);
+    }
+
    public Result<Comment> add(Comment comment) {
         Result<Comment> result = validate(comment);
         if (!result.isSuccess()) {
