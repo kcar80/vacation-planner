@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import LoginContext from "../../contexts/LoginContext";
 import { useHistory } from "react-router";
-import { findById } from "../../services/locations";
 import { Link } from "react-router-dom";
 import { findByUsername } from "../../services/users";
 import { emptyUser } from "../../services/data";
@@ -67,13 +66,24 @@ function Profile() {
             {vacations.map(v =>
                 <div key={v.vacationId}>
                     <div>{v.description}</div>
+
+                    <div>Users:</div>
+                    {v.users.map(l => 
+                        <li key={l.identifier}>
+                            <div className="row">
+                                <div className="col">{l.user.firstName} {l.user.lastName}</div>
+                                <div className="col"></div>
+                            </div>
+                        </li>)}
+
                     <div>Stops:</div>
                     {v.locations.map(l => 
-                        <li>
+                        <li key={l.identifier}>
                             <div className="row">
-                                <div className="col">{findById(l.locationId).description}</div>
+                                <div className="col">{l.location.description}</div>
                                 <div className="col">{l.startDate}</div>
                                 <div className="col">{l.endDate}</div>
+                                <div className="col"></div>
                             </div>
                         </li>)}
                 </div>)} 

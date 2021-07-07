@@ -30,7 +30,7 @@ function MainPage() {
   const markers = () => locations.map(
     location => (
       <Marker key={location.description} longitude={location.longitude} latitude={location.latitude} >
-        <Icon onClick={()=> onMapClick(location.description)}/>
+        <Icon onClick={() => onMapClick(location.description)}/>
       </Marker>
     )
   );

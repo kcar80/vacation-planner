@@ -58,7 +58,7 @@ function App() {
             <Location />
           </Route>
           <Route path="/profile">
-            <Profile />
+          {credentials && credentials.username ? <Profile/> : <Redirect to="/login" />}
           </Route>
           <Route path="/register">
             <Register />

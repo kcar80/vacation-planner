@@ -29,7 +29,16 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
     public List<Vacation> findAll() {
         final String sql = "select vacation_id, `description`, "
                 +"leasure_level from vacation limit 1000;";
-        return jdbcTemplate.query(sql, new VacationMapper());
+        List<Vacation> vacations = jdbcTemplate.query(sql, new VacationMapper());
+
+        for(Vacation v: vacations) {
+            if(v !=null){
+                addUsers(v);
+                addLocations(v);
+            }
+        }
+
+        return vacations;
     }
 
     @Override
@@ -40,7 +49,16 @@ public class VacationJdbcTemplateRepository implements VacationRepository{
                 "inner join user u on u.user_id = vu.user_id " +
                 "where u.user_id=?;";
 
-        return jdbcTemplate.query(sql, new VacationMapper(), userId) ;
+        List<Vacation> vacations = jdbcTemplate.query(sql, new VacationMapper(), userId);
+
+        for(Vacation v: vacations) {
+            if(v !=null){
+                addUsers(v);
+                addLocations(v);
+            }
+        }
+
+        return vacations;
     }
 
     @Override
