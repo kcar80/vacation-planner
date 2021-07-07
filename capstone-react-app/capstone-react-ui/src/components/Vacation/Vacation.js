@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import ReactMapGL, {Marker} from 'react-map-gl';
+import ReactMapGL, {Marker, Popup} from 'react-map-gl';
 import { useHistory, useParams } from "react-router";
 import { findAllLocations } from "../../services/locations";
+import { emptyVacation } from "../../services/data";
 import { findById } from "../../services/vacations";
 import Icon from "../Location/city-pin";
 import PolylineOverlay from "./PolylineOverlay";
@@ -14,12 +15,19 @@ import '../../css files/main.css';
 function Vacation() {
 
   const [locations, setLocations] = useState([]);
+  const [vacation, setVacation] = useState(emptyVacation);
   const [newComment, setNewComment] = useState({ ...emptyComment });
   const [user, setUser] = useState(emptyUser);
   const [comments, setComments] = useState([]);
   const {username} = useContext(LoginContext);
   const { id } = useParams();
   const history = useHistory();
+
+  useEffect(() => {
+    findById(id)
+        .then(setVacation)
+        .catch(() => history.push("/failure"));
+}, [id, history]);
 
   useEffect(() => {
       findAllLocations()
@@ -48,17 +56,25 @@ function Vacation() {
     history.push(`/location/${description}`);
   };
 
-  const markers = () => locations.map(
+  const markers = () => vacation.locations.map(l => l.location).map(
     location => (
-      <Marker key={location.description} longitude={location.longitude} latitude={location.latitude} >
+    <Marker key={location.description} longitude={location.longitude} latitude={location.latitude} >
         <Icon onClick={() => onMapClick(location.description)}/>
-      </Marker>
+    </Marker>
     )
-  );
+);
 
-  const points = () => locations.map(
+  const points = () => vacation.locations.map(l => l.location).map(
     location => [location.longitude, location.latitude]   
-  );
+);
+
+  const popups = () => vacation.locations.map(l => l.location).map(
+    location => (
+      <Popup key={location.locationId} longitude={location.longitude} latitude={location.latitude} closeButton={false} closeOnClick={false} anchor="bottom" >
+          <div>{location.description}</div>
+      </Popup>
+  )
+);
 
   const handleChange = evt => {
     const tempComment = { ...newComment };
@@ -76,20 +92,21 @@ function Vacation() {
 
   return (<div className="row align-items-center white">
     <div className="container">
-        <h3>View your vacation</h3>
-    </div>
-    <div className="mapbox-react">
-      <ReactMapGL
-        {...viewport}
-        width="1300px"
-        height="500px"
-        mapStyle="mapbox://styles/mapbox/streets-v11"
-        onViewportChange={nextViewport => setViewport(nextViewport)}
-        mapboxApiAccessToken={`pk.eyJ1Ijoicm9iYmU4NyIsImEiOiJja3FtajIzY2owODFzMnZtem02OTJndjF3In0.xekIFGpFViXp6WPMgmSyhg`}>
-        <PolylineOverlay points={points()} />
-        {markers()}
-      </ReactMapGL>
-    </div>
+            <h3>View your vacation</h3>
+        </div>
+        <div className="mapbox-react">
+        <ReactMapGL
+            {...viewport}
+            width="1300px"
+            height="500px"
+            mapStyle="mapbox://styles/mapbox/streets-v11"
+            onViewportChange={nextViewport => setViewport(nextViewport)}
+            mapboxApiAccessToken={`pk.eyJ1Ijoicm9iYmU4NyIsImEiOiJja3FtajIzY2owODFzMnZtem02OTJndjF3In0.xekIFGpFViXp6WPMgmSyhg`}>
+            <PolylineOverlay points={points()} />
+            {popups()}
+            {markers()}
+        </ReactMapGL>
+        </div>
     <div className="container">
         <h3>Vacation Comments</h3>
         <div className="container form-group" onSubmit={submitComment}>
@@ -111,65 +128,6 @@ function Vacation() {
         </div>
     </div>
   </div>);
-    const [locations, setLocations] = useState([]);
-    const [vacation, setVacation] = useState([]);
-    const history = useHistory();
-    const { id } = useParams();
-
-    useEffect(() => {
-        findById(id)
-            .then(setVacation)
-            .catch(() => history.push("/failure"));
-    }, [id, history]);
-
-    useEffect(() => {
-        findAllLocations()
-            .then(setLocations)
-            .catch(() => history.push("/failure"));
-    }, [history]);
-
-    const [viewport, setViewport] = useState({
-        latitude: 38.8,
-        longitude: -96.4,
-        zoom: 3.5
-    });
-
-    const onMapClick = description => {
-        history.push(`/location/${description}`);
-    };
-
-    const markers = () => locations.map(
-        location => (
-        <Marker key={location.description} longitude={location.longitude} latitude={location.latitude} >
-            <Icon onClick={() => onMapClick(location.description)}/>
-        </Marker>
-        )
-    );
-
-    const points = () => locations.map(
-        location => [location.longitude, location.latitude]   
-    );
-
-    return (<div className="row align-items-center">
-        <div className="container">
-            <h3>View your vacation</h3>
-        </div>
-        <div className="mapbox-react">
-        <ReactMapGL
-            {...viewport}
-            width="1300px"
-            height="500px"
-            mapStyle="mapbox://styles/mapbox/streets-v11"
-            onViewportChange={nextViewport => setViewport(nextViewport)}
-            mapboxApiAccessToken={`pk.eyJ1Ijoicm9iYmU4NyIsImEiOiJja3FtajIzY2owODFzMnZtem02OTJndjF3In0.xekIFGpFViXp6WPMgmSyhg`}>
-            <PolylineOverlay points={points()} />
-            {markers()}
-        </ReactMapGL>
-        </div>
-        <div className="container">
-            <h3>Vacation Comments</h3>
-        </div>
-    </div>);
 }
 
 export default Vacation;

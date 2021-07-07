@@ -17,7 +17,9 @@ export const emptyUser = {
 export const emptyVacation ={
     vacationId: 0,
     description: "",
-    leisureLevel: ""
+    leisureLevel: "",
+    locations: [],
+    users: []
 };
 
 export const emptyVacationStop={
