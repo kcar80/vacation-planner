@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import LoginContext from "../contexts/LoginContext";
 import "./Nav.css";
+import "../css files/main.css";
 
 
 function Nav(){
@@ -14,7 +15,8 @@ function Nav(){
         history.push("/");
     }
     
-    return (<div>
+    return (
+    <div className="grey">
       <div className="row align-items-center">
           <Link to="/" className="col pageheader">Trip Advisory Plus</Link>
           <div className="col d-flex justify-content-end">
