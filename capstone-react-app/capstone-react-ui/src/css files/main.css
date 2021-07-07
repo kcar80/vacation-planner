@@ -37,3 +37,14 @@ body {
     outline-width: 3px;
 }
 
+.hidden-link {
+    text-decoration: none;
+    color: black;
+    text-decoration: underline;
+    font-weight: 560;
+}
+
+.hidden-link:hover {
+    color:black;
+}
+

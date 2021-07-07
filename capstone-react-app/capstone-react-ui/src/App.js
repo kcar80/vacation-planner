@@ -80,7 +80,7 @@ function App() {
           <Route path="/profile">
           {credentials && credentials.username ? <Profile/> : <Redirect to="/login" />}
           </Route>
-          <Route path="/vacation:id">
+          <Route path="/vacation/:id">
             <Vacation />
           </Route>
           <Route path="/register">

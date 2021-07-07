@@ -65,8 +65,8 @@ function Profile() {
         {vacations ? 
             <div>
             {vacations.map(v =>
-                <div key={v.vacationId} className="container mb-3 alt-colors">
-                    <div className="title">{v.description}</div>
+                <div key={v.vacationId} className="container mb-3 py-1 alt-colors">
+                    <Link to={`/vacation/${v.vacationId}`} className="title hidden-link">{v.description}</Link>
                     <div>Users:</div>
                     {v.users.map(u => 
                         <li key={u.identifier} className="container no-bullets">
