@@ -1,14 +1,10 @@
 const url = "http://localhost:8080/api/vacation";
 
-export async function findById(vacationId) {
-    const response = await fetch(`${url}/vid/${vacationId}`);
+export async function findAllVacations() {
+    const response = await fetch(url);
     if (response.status === 200) {
         return await response.json();
     }
-export async function findAllVacations() {
-    const response = await fetch(url);
-
-    
     return Promise.reject("not 200 OK");
 }
 

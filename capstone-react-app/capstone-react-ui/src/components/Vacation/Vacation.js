@@ -1,29 +1,22 @@
-import { useState, useEffect, useParams } from "react";
-import ReactMapGL, {Marker} from 'react-map-gl';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import ReactMapGL, {Marker, Popup} from 'react-map-gl';
 import { useHistory } from "react-router";
-import { findAllLocations } from "../../services/locations";
+import { emptyVacation } from "../../services/data";
 import { findById } from "../../services/vacations";
 import Icon from "../Location/city-pin";
 import PolylineOverlay from "./PolylineOverlay";
 
 function Vacation() {
 
-    const [locations, setLocations] = useState([]);
-    const [vacation, setVacation] = useState([]);
+    const [vacation, setVacation] = useState(emptyVacation);
     const history = useHistory();
     const { id } = useParams();
-
     useEffect(() => {
         findById(id)
             .then(setVacation)
             .catch(() => history.push("/failure"));
     }, [id, history]);
-
-    useEffect(() => {
-        findAllLocations()
-            .then(setLocations)
-            .catch(() => history.push("/failure"));
-    }, [history]);
 
     const [viewport, setViewport] = useState({
         latitude: 38.8,
@@ -35,7 +28,7 @@ function Vacation() {
         history.push(`/location/${description}`);
     };
 
-    const markers = () => locations.map(
+    const markers = () => vacation.locations.map(l => l.location).map(
         location => (
         <Marker key={location.description} longitude={location.longitude} latitude={location.latitude} >
             <Icon onClick={() => onMapClick(location.description)}/>
@@ -43,8 +36,17 @@ function Vacation() {
         )
     );
 
-    const points = () => locations.map(
+    const points = () => vacation.locations.map(l => l.location).map(
         location => [location.longitude, location.latitude]   
+    );
+
+
+    const popups = () => vacation.locations.map(l => l.location).map(
+        location => (
+            <Popup key={location.locationId} longitude={location.longitude} latitude={location.latitude} closeButton={false} closeOnClick={false} anchor="bottom" >
+                <div>{location.description}</div>
+            </Popup>
+        )
     );
 
     return (<div className="row align-items-center">
@@ -60,6 +62,7 @@ function Vacation() {
             onViewportChange={nextViewport => setViewport(nextViewport)}
             mapboxApiAccessToken={`pk.eyJ1Ijoicm9iYmU4NyIsImEiOiJja3FtajIzY2owODFzMnZtem02OTJndjF3In0.xekIFGpFViXp6WPMgmSyhg`}>
             <PolylineOverlay points={points()} />
+            {popups()}
             {markers()}
         </ReactMapGL>
         </div>
