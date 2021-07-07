@@ -27,7 +27,7 @@ public class VacationUserController {
         return ErrorResponse.build(result);
     }
 
-    @PutMapping
+    @PutMapping("/{vacationId}/{userId}")
     public ResponseEntity<Object> update(@RequestBody VacationUser vacationUser) {
         Result<Void> result = service.updateUser(vacationUser);
         if (result.isSuccess()) {

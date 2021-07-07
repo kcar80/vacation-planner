@@ -2,6 +2,7 @@ body {
     background-image: url(https://wallpaperaccess.com/full/136072.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    
 }
 
 .grey{
@@ -29,3 +30,10 @@ body {
 .alt-colors:nth-of-type(odd){
     background-color: rgba(211, 211, 211, 0.548);
 }
+
+.header-border {
+    outline-color: white;
+    outline-style: dotted;
+    outline-width: 3px;
+}
+

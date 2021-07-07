@@ -16,7 +16,7 @@ function Nav(){
     }
     
     return (
-    <div className="grey">
+    <div className="grey header-border border my-3">
       <div className="row align-items-center">
           <Link to="/" className="col pageheader">Trip Advisory Plus</Link>
           <div className="col d-flex justify-content-end">

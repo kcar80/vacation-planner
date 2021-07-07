@@ -61,7 +61,7 @@ function Profile() {
             <button className="col-md-auto btn btn-sm btn-outline-secondary" onClick={changePasswordState}>hide/show</button>
         </div>
         
-        <h3 className="mt-4">Vacations: <Link to="vacation/add" className="btn btn-primary ms-3">Add Vacation</Link></h3>
+        <h3 className="mt-4">Vacations: <Link to="/vacation/add" className="btn btn-primary ms-3">Add Vacation</Link></h3>
         {vacations ? 
             <div>
             {vacations.map(v =>
@@ -84,6 +84,8 @@ function Profile() {
                                 <div className="col">{l.startDate}  -  {l.endDate}</div>
                             </div>
                         </li>)}
+                        <Link to={`/vacation/delete/${v.vacationId}`} className={`btn btn-danger me-2${(username ? "" : " disabled")}`}>Delete</Link>
+                        <Link to={`/vacation/edit/${v.vacationId}`} className={`btn btn-info${(username ? "" : " disabled")}`}>Edit</Link>
                 </div>)} 
             </div> 
             : <div>No Vacations found</div>}
