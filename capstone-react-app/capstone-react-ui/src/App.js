@@ -13,6 +13,7 @@ import LocationForm from "./components/AdministratorTools/LocationForm";
 import Nav from "./components/Nav";
 import Location from "./components/Location/Location";
 import Profile from "./components/Profile/Profile";
+import Vacation from "./components/Vacation/Vacation";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import VacationForm from "./components/Profile/VacationForm";
 
@@ -65,6 +66,9 @@ function App() {
           </Route>
           <Route path="/profile">
           {credentials && credentials.username ? <Profile/> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/vacation">
+            <Vacation />
           </Route>
           <Route path="/register">
             <Register />
