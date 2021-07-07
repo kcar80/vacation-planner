@@ -14,6 +14,7 @@ import Nav from "./components/Nav";
 import Location from "./components/Location/Location";
 import Profile from "./components/Profile/Profile";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import VacationForm from "./components/Profile/VacationForm";
 
 function App() {
   const [credentials, setCredentials] = useState({
@@ -56,6 +57,9 @@ function App() {
           </Route>
           <Route path="/location/:description">
             <Location />
+          </Route>
+          <Route path={["/vacation/edit/:id", "/vacation/add"]}>
+          {credentials && credentials.username ? <VacationForm />  : <Redirect to="/login" />}
           </Route>
           <Route path="/profile">
           {credentials && credentials.username ? <Profile/> : <Redirect to="/login" />}

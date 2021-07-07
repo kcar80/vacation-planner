@@ -27,7 +27,7 @@ function AdminTools(){
           <Link to="/admintools/location/add" className={`btn btn-primary m-1`}>Add a Location</Link>
         </div>
 
-        <div className="d-md-flex h-md-100 align-items-center">
+        <div className="d-md-flex h-md-100 align-items-start">
             <div className="col-md-6">
                 <h1 className="col">Users</h1>
                 <div className="row grid-header">

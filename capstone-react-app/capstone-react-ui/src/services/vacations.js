@@ -2,6 +2,11 @@ const url = "http://localhost:8080/api/vacation";
 
 export async function findAllVacations() {
     const response = await fetch(url);
+
+    
+    return Promise.reject("not 200 OK");
+}
+
 export async function findVacationsByUser(userId) {
     const response = await fetch(`${url}/uid/${userId}`);
     if (response.status === 200) {
@@ -10,8 +15,9 @@ export async function findVacationsByUser(userId) {
     return Promise.reject("not 200 OK");
 }
 
+
 export async function findById(vacationId) {
-    const response = await fetch(`${url}/id/${vacationId}`);
+    const response = await fetch(`${url}/vid/${vacationId}`);
     if (response.status === 200) {
         return await response.json();
     }
@@ -20,11 +26,13 @@ export async function findById(vacationId) {
 
 
 export async function add(vacation) {
+   
+    
     const init = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
         },
         body: JSON.stringify(vacation)
     }

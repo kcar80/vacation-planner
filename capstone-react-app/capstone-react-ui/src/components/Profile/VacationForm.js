@@ -1,13 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useHistory, useParams } from "react-router";
 import { emptyVacation } from "../../services/data";
 import {findById, add, update} from "../../services/vacations";
+import { emptyUser } from "../../services/data";
+import { emptyVacationStop } from "../../services/data";
+import {emptyVacationUser} from "../../services/data";
+import { findByUsername } from "../../services/users";
+import LoginContext from "../../contexts/LoginContext";
+import {addVacationUser} from "../../services/vacationuser";
+import {emptyLocation} from "../../services/data";
 
 function VacationForm(){
     const[vacation, setVacation] = useState(emptyVacation);
+    const [user, setUser] = useState(emptyUser);
+    const [location, setLocation] = useState(emptyLocation);
+    const[vacationStop, setVacationStop] =useState(emptyVacationStop);
+    const[vacationUser, setVacationUSer] =useState(emptyVacationUser);
+    const {username} = useContext(LoginContext);
     const history = useHistory();
     const { id } = useParams();
 
+    useEffect(() => {
+        findByUsername(username)
+            .then(setUser)
+            .catch(() => history.push("/failure"));
+    }, [username, history]);
 
  useEffect(() => {
         if (id) {
@@ -26,13 +43,24 @@ function VacationForm(){
     const onSubmit = evt => {
         evt.preventDefault();
         (vacation.vacationId > 0 ? update(vacation) : add(vacation))
-            .then(() => history.push("/vacation"))
+           
+            .then(() => addVacationUser({vacationId: vacation.vacationId,
+                 userId: user.userId }))
+            .then(() => history.push("/profile"))
             .catch();
     };
 
+    // const onSubmit = evt => {
+    //     evt.preventDefault();
+
+    //     register({ username: user.username, password: user.password })
+    //         .then(() => add(user)
+    //         .then(() => history.push("/login")))
+        
+
     const cancel = evt => {
         evt.preventDefault();
-        history.push("/vacation");
+        history.push("/profile");
     };
 
     return (
@@ -45,10 +73,16 @@ function VacationForm(){
             </div>
 
             <div className="form-group">
-                <label htmlFor="latitude">Leisure Level</label>
+                <label htmlFor="leasureLevel">Leisure Level</label>
                 <input type="text" className="form-control" id="leasureLevel" name="leasureLevel"
                     value={vacation.leasureLevel} onChange={onChange} required />
             </div>
+           
+
+            <div className="form-group">
+                <button type="submit" className="btn btn-primary me-2">Save</button>
+                <button className="btn btn-secondary" onClick={cancel}>Cancel</button>
+            </div> 
 
             
         </form>
