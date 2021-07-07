@@ -7,3 +7,11 @@ export async function findVacationsByUser(userId) {
     }
     return Promise.reject("not 200 OK");
 }
+
+export async function findById(vacationId) {
+    const response = await fetch(`${url}/vid/${vacationId}`);
+    if (response.status === 200) {
+        return await response.json();
+    }
+    return Promise.reject("not 200 OK");
+}
