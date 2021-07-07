@@ -1,0 +1,31 @@
+body {
+    background-image: url(https://wallpaperaccess.com/full/136072.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.grey{
+    background-color: rgba(185, 185, 185, 0.664);
+    padding: 0.2em;
+}
+
+.white{
+    background-color: rgba(255, 255, 255, 0.575);
+}
+
+.title{
+    text-decoration: underline;
+    font-weight: 560;
+}
+
+.no-bullets{
+    list-style-type: none;
+}
+
+.alt-colors:nth-of-type(even){
+    background-color: rgba(255, 255, 255, 0.548);
+}
+
+.alt-colors:nth-of-type(odd){
+    background-color: rgba(211, 211, 211, 0.548);
+}
