@@ -52,11 +52,16 @@ export async function add(vacation) {
 }
 
 export async function update(vacation) {
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+        return Promise.reject("forbidden");
+    }
     const init = {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": `Bearer ${jwt}`
         },
         body: JSON.stringify(vacation)
     }
