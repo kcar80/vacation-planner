@@ -14,7 +14,7 @@ function StopForm(){
 
     const[vacationStop, setVacationStop] =useState(emptyVacationStop);
     const[vacation, setVacation]=useState(emptyVacation);
-    const[location, setLocation]=useState(emptyLocation);
+    const[locations, setLocations]=useState(emptyLocation);
 
     useEffect(() => {
         if (id) {
@@ -23,6 +23,12 @@ function StopForm(){
                 .catch(() => history.push("/failure"));
         }
     }, [history, id]);
+
+    useEffect(()=>{
+        findAllLocations()
+        .then(setLocations)
+        .catch(() => history.push("/failure"));
+    },[history]);
 
     useEffect(() => {
         findByUsername(username)
@@ -45,6 +51,20 @@ return(
 <input type="text" className="form-control" id="location" name="location"
     value={location.description} onChange={onChange} required />
 </div>
+
+<div className="dropdown show">
+  <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Locations
+  </a>
+
+  {locations && locations.map(l => <div key= {l.locationId} 
+     className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a className="dropdown-item" href="#">Action</a>
+    <a className="dropdown-item" href="#">Another action</a>
+    <a classNAme="dropdown-item" href="#">Something else here</a>
+  </div>)}
+  </div>
+
 
 <div className="form-group">
 <label htmlFor="startDate">Start Date</label>
