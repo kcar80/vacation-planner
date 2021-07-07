@@ -7,7 +7,7 @@ import { emptyVacationStop } from "../../services/data";
 import {emptyVacationUser} from "../../services/data";
 import { findByUsername } from "../../services/users";
 import LoginContext from "../../contexts/LoginContext";
-import {addVacationUser} from "../../services/vacationuser";
+import {addVacationUser, updateVacationUser} from "../../services/vacationuser";
 import {emptyLocation} from "../../services/data";
 
 function VacationForm(){
@@ -40,13 +40,37 @@ function VacationForm(){
         setVacation(nextVacation);
     };
 
+    // const onSubmit = evt => {
+    //     evt.preventDefault();
+    //     (vacation.vacationId > 0 ? update(vacation) : add(vacation))
+    //         .then(v=>{
+    //             setVacation(v);
+    //                 return v;
+    //             })
+    //         .then( v=> addVacationUser({
+    //             vacationId: v.vacationId,
+    //              user: user, identifier: `${v.vacationId} ${user.userId}`}))
+    //         .then(() => history.push("/profile"))
+    //         .catch();
+    // };
+
     const onSubmit = evt => {
         evt.preventDefault();
-        (vacation.vacationId > 0 ? update(vacation) : add(vacation))
-            .then(() => addVacationUser({vacationId: vacation.vacationId,
-                 user: user, identifier: `${vacation.vacationId} ${user.userId}`}))
+        if(vacation.vacationId > 0){
+            update(vacation)
             .then(() => history.push("/profile"))
-            .catch();
+            .catch();}
+        else if(vacation.vacationId == 0){
+            add(vacation)
+            .then(v=>{
+                setVacation(v);
+                    return v;
+                })
+            .then( v=> addVacationUser({
+                vacationId: v.vacationId,
+                 user: user, identifier: `${v.vacationId} ${user.userId}`}))
+            .then(() => history.push("/profile"))
+            .catch();}
     };
 
     // const onSubmit = evt => {

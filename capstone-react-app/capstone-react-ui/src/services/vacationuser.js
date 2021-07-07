@@ -11,10 +11,10 @@ export async function addVacationUser(vacationuser) {
     }
 
     const response = await fetch(url, init);
-    if (response.status === 201) {
-        return await response.json();
+    if (response.status !== 201) {
+         return Promise.reject("not 201 Created");
     }
-    return Promise.reject("not 201 Created");
+   
 }
 
 
@@ -29,8 +29,7 @@ export async function updateVacationUser(vacationuser) {
     }
     const response = await fetch(`${url}/${vacationuser.vacationId}/${vacationuser.user.userId}`, init);
     if (response.status !== 204) {
-        const errors = await response.json();
-        return Promise.reject(errors);
+        return Promise.reject("not 204 Created");
     }
 }
 

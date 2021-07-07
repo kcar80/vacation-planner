@@ -1,5 +1,10 @@
 const url = "http://localhost:8080/api/vacation";
 
+export async function findById(vacationId) {
+    const response = await fetch(`${url}/vid/${vacationId}`);
+    if (response.status === 200) {
+        return await response.json();
+    }
 export async function findAllVacations() {
     const response = await fetch(url);
 
@@ -50,11 +55,16 @@ export async function add(vacation) {
 }
 
 export async function update(vacation) {
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+        return Promise.reject("forbidden");
+    }
     const init = {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": `Bearer ${jwt}`
         },
         body: JSON.stringify(vacation)
     }
