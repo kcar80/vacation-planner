@@ -27,6 +27,8 @@ function App() {
     const secondDot = token.indexOf(".", firstDot + 1);
     const jwtBody = token.substring(firstDot + 1, secondDot);
     const body = JSON.parse(atob(jwtBody));
+
+    localStorage.setItem("jwt", token);
     setCredentials({
       username: body.sub,
       jwt: token

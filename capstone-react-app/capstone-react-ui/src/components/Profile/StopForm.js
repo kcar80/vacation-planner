@@ -5,9 +5,30 @@ import { findByUsername } from "../../services/users";
 import LoginContext from "../../contexts/LoginContext";
 const history = useHistory();
 const { id } = useParams();
+import { findByUsername } from "../../services/users";
+import LoginContext from "../../contexts/LoginContext";
+import {emptyLocation} from "../../services/data";
+import {findAllLocations} from "../../services/locations";
+import { emptyVacation } from "../../services/data";
 function StopForm(){
 
     const[vacationStop, setVacationStop] =useState(emptyVacationStop);
+    const[vacation, setVacation]=useState(emptyVacation);
+    const[location, setLocation]=useState(emptyLocation);
+
+    useEffect(() => {
+        if (id) {
+            findById(id)
+                .then(v => setVacation(v))
+                .catch(() => history.push("/failure"));
+        }
+    }, [history, id]);
+
+    useEffect(() => {
+        findByUsername(username)
+            .then(setUser)
+            .catch(() => history.push("/failure"));
+    }, [username, history]);
 
 const cancel = evt => {
     evt.preventDefault();

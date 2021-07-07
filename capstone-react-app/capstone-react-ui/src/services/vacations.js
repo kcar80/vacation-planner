@@ -26,16 +26,21 @@ export async function findById(vacationId) {
 
 
 export async function add(vacation) {
-   
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+        return Promise.reject("forbidden");
+    }
     
     const init = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
+            "Authorization": `Bearer ${jwt}`
         },
         body: JSON.stringify(vacation)
     }
+    console.log(init);
     const response = await fetch(url, init);
     if (response.status === 201) {
         return await response.json();

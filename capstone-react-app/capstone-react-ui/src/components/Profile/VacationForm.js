@@ -43,9 +43,8 @@ function VacationForm(){
     const onSubmit = evt => {
         evt.preventDefault();
         (vacation.vacationId > 0 ? update(vacation) : add(vacation))
-           
             .then(() => addVacationUser({vacationId: vacation.vacationId,
-                 userId: user.userId }))
+                 user: user, identifier: `${vacation.vacationId} ${user.userId}`}))
             .then(() => history.push("/profile"))
             .catch();
     };
@@ -73,9 +72,9 @@ function VacationForm(){
             </div>
 
             <div className="form-group">
-                <label htmlFor="leasureLevel">Leisure Level</label>
-                <input type="text" className="form-control" id="leasureLevel" name="leasureLevel"
-                    value={vacation.leasureLevel} onChange={onChange} required />
+                <label htmlFor="leisureLevel">Leisure Level</label>
+                <input type="text" className="form-control" id="leisureLevel" name="leisureLevel"
+                    value={vacation.leisureLevel} onChange={onChange} required />
             </div>
            
 

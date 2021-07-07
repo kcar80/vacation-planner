@@ -40,7 +40,7 @@ public class Vacation {
         this.users = users;
     }
 
-    @NotNull
+
     private int vacationId;
 
     @NotBlank
