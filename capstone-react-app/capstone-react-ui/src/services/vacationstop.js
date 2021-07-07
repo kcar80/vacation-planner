@@ -1,48 +1,47 @@
-// const url = "http://localhost:8080/api/vacation/user";
+const url = "http://localhost:8080/api/vacation/location";
 
-// export async function addVacationStop(vacationStop) {
-//     const init = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-//         body: JSON.stringify(vacationuser)
-//     }
+export async function addVacationStop(vacationstop) {
+    const init = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(vacationstop)
+    }
 
-//     const response = await fetch(url, init);
-//     if (response.status === 201) {
-//         return await response.json();
-//     }
-//     return Promise.reject("not 201 Created");
-// }
+    const response = await fetch(url, init);
+    if (response.status !== 201) {
+         return Promise.reject("not 201 Created");
+    }
+   
+}
 
 
-// export async function updateVacationStop(vacationId, locationId) {
-//     const init = {
-//         method: "PUT",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-//         body: JSON.stringify(location)
-//     }
-//     const response = await fetch(`${url}/${vacationId}/${locationId}`, init);
-//     if (response.status !== 204) {
-//         const errors = await response.json();
-//         return Promise.reject(errors);
-//     }
-// }
+export async function updateVacationStop(vacationstop) {
+    const init = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(vacationstop)
+    }
+    const response = await fetch(`${url}/${vacationstop.vacationId}/${vacationstop.location.locationId}`, init);
+    if (response.status !== 204) {
+        return Promise.reject("not 204 Created");
+    }
+}
 
-// export async function deleteVacationStopById(vacationId, userId, jwt) {
-//     const init = {
-//         method: "DELETE",
-//         headers: {
-//             "Authorization": `Bearer ${jwt}`
-//         }
-//     }
-//     const response = await fetch(`${url}/${vacation.id}/${user.id}`, init);
-//     if (response.status !== 204) {
-//         return Promise.reject("not 204 No Content");
-//     }
-// }
+export async function deleteVacationStopById(vacationstop, jwt) {
+    const init = {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${jwt}`
+        }
+    }
+    const response = await fetch(`${url}/${vacationstop.vacationId}/${vacationstop.location.locationId}`, init);
+    if (response.status !== 204) {
+        return Promise.reject("not 204 No Content");
+    }
+}

@@ -16,6 +16,8 @@ import Profile from "./components/Profile/Profile";
 import Vacation from "./components/Vacation/Vacation";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import VacationForm from "./components/Profile/VacationForm";
+import VacationConfirmDelete from "./components/Profile/VacationConfirmDelete"
+import StopForm from "./components/Profile/StopForm"
 
 function App() {
   const [credentials, setCredentials] = useState({
@@ -64,6 +66,17 @@ function App() {
           <Route path={["/vacation/edit/:id", "/vacation/add"]}>
           {credentials && credentials.username ? <VacationForm />  : <Redirect to="/login" />}
           </Route>
+          <Route path="/vacation/delete/:id">
+          {credentials && credentials.username ? <VacationConfirmDelete />  : <Redirect to="/login" />}
+          </Route>
+
+          <Route path={["/vacationstop/edit/:id/:id", "/vacationstop/add"]}>
+          {credentials && credentials.username ? <StopForm />  : <Redirect to="/login" />}
+          </Route>
+          {/* <Route path="/vacationstop/delete/:id/:id">
+          {credentials && credentials.username ? <VacationConfirmDelete />  : <Redirect to="/login" />}
+          </Route> */}
+
           <Route path="/profile">
           {credentials && credentials.username ? <Profile/> : <Redirect to="/login" />}
           </Route>

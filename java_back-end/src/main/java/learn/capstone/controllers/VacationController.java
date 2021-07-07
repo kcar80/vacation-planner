@@ -58,10 +58,11 @@ public class VacationController {
             @PathVariable int vacationId,
             @RequestBody @Valid Vacation vacation,
             BindingResult result) {
-        if (result.hasErrors()) {
-            return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
+        Result<Vacation> vacationResult = service.update(vacation);
+        if (!vacationResult.isSuccess()) {
+            return ErrorResponse.build(vacationResult);
         }
-        return new ResponseEntity<>(vacation, HttpStatus.CREATED);
+        return new ResponseEntity<>(vacationResult.getPayload(), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{vacationId}")
