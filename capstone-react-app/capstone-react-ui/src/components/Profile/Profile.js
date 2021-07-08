@@ -82,8 +82,8 @@ function Profile() {
                             <div className="row">
                                 <div className="col-2">{l.location.description}</div>
                                 <div className="col">{l.startDate}  -  {l.endDate}</div>
-                                <Link to={`/vacation/${v.vacationId}/location/${l.location.locationId}/delete`} className={`btn btn-success btn  me-2`}>Delete Stop</Link>
-                            </div>
+                                <div className="row-md-auto"><Link to={`/vacation/${v.vacationId}/location/${l.location.locationId}/delete`} className={`btn btn-success  me-2`}>Delete Stop</Link>
+                            </div></div>
                         </li>)}
                         <Link to={`/vacation/delete/${v.vacationId}`} className={`btn btn-danger me-2${(username ? "" : " disabled")}`}>Delete Vacation</Link>
                         <Link to={`/vacation/edit/${v.vacationId}`} className={`btn btn-info${(username ? "" : " disabled")}`}>Edit Vacation</Link>
