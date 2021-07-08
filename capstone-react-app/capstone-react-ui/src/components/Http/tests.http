@@ -33,10 +33,14 @@ Accept: application/json
 GET  http://localhost:8080/api/comment/vid/1 HTTP/1.1
 
 ###
-POST http://localhost:8080/api/comment/vid/1 HTTP/1.1
+POST http://localhost:8080/api/comment HTTP/1.1
 Content-Type: application/json
 Accept: application/json
+
 { "commentId": 0,
   "text": "test comment",
   "userId": 1,
   "vacationId": 1}
+
+###
+GET http://localhost:8080/api/comment/cid/22

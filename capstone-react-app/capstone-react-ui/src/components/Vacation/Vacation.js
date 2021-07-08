@@ -6,7 +6,7 @@ import { emptyVacation } from "../../services/data";
 import { findById } from "../../services/vacations";
 import Icon from "../Location/city-pin";
 import PolylineOverlay from "./PolylineOverlay";
-import { emptyComment, findByVacationId,add } from "../../services/comments";
+import { emptyComment, findByCommentId, findByVacationId, add, deleteById } from "../../services/comments";
 import { findByUsername } from "../../services/users";
 import LoginContext from "../../contexts/LoginContext";
 import { emptyUser } from "../../services/data";
@@ -37,8 +37,9 @@ function Vacation() {
 
   useEffect(() => {
     findByVacationId(id)
-      .then(setComments);
-  })
+      .then(setComments)
+      .catch();
+  }, [id]);
 
   useEffect(() => {
     findByUsername(username)
@@ -76,23 +77,48 @@ function Vacation() {
   )
 );
 
+  const refreshComments = () => {
+    return findByVacationId(id)
+      .then(setComments)
+      .catch();
+  }
+
   const handleChange = evt => {
     const tempComment = { ...newComment };
     tempComment.text = evt.target.value;
     setNewComment(tempComment);
   }
 
-  const submitComment = () => {
-    const tempComment = { ...newComment };
+  const submitComment = evt => {
+    evt.preventDefault();
+    let tempComment = { ...newComment };
     tempComment.userId = user.userId;
     tempComment.vacationId = id;
-    setNewComment(tempComment);
-    add(newComment);
+    add(tempComment)
+      .then(setNewComment(emptyComment))
+      .then(refreshComments);
+  }
+
+  const editComment = evt => {
+    let temp = { ...emptyComment };
+    temp.text = evt.target.id;
+    setNewComment(temp);
+    
+    deleteById(evt.target.value)
+      .then(refreshComments)
+      .catch(() => history.push("/failure"));
+    
+  }
+
+  const deleteComment = evt => {
+    deleteById(evt.target.value)
+      .then(refreshComments)
+      .catch(() => history.push("/failure"));
   }
 
   return (<div className="row align-items-center white">
     <div className="container">
-            <h3>View your vacation</h3>
+            <h3>View your vacation: {vacation.description}</h3>
         </div>
         <div className="mapbox-react">
         <ReactMapGL
@@ -109,19 +135,27 @@ function Vacation() {
         </div>
     <div className="container">
         <h3>Vacation Comments</h3>
-        <div className="container form-group" onSubmit={submitComment}>
+        <form className="container form-group" onSubmit={submitComment}>
           <div>Add a Comment:</div>
-          <textarea id="new-comment" name="newComment" onChange={handleChange} rows="2" cols="100"></textarea>
+          <textarea id="new-comment" name="newComment" onChange={handleChange} value={newComment.text} maxlength="250" rows="2" cols="100"></textarea>
           <div>
             <input type="submit" className="btn btn-primary"></input>
           </div>
-        </div>
+        </form>
         <div>
           {comments.map(c => 
             <div key={c.commentId} className="container my-3 py-1 alt-colors">
               <div className="row">
-                <div className="col-3">{c.userId} : </div>
-                <div className="col">{c.text}</div>
+                <div className="col-2"></div>
+                <div className="col-5">{c.text}</div>
+                <div className="col">
+                  {c.userId === user.userId ?
+                    <div>
+                      <button className="btn btn-info me-2" value={c.commentId} id={c.text} onClick={editComment}>Edit</button>
+                      <button className="btn btn-danger" value={c.commentId} onClick={deleteComment}>Delete</button>
+                    </div>
+                    : <div></div>}
+                </div>
               </div>
             </div>
             )}
