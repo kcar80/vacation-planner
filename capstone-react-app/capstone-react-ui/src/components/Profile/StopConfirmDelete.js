@@ -6,6 +6,7 @@ import {deleteVacationStopById} from "../../services/vacationstop";
 function VacationConfirmDelete() {
 
     const [vacationstop, setVacationStop] = useState({ startDate: "" });
+    const [vacation, setVacation] = useState({description :""})
     const history = useHistory();
     const { id } = useParams();
 
