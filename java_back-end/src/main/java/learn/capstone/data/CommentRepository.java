@@ -10,6 +10,8 @@ public interface CommentRepository {
 
     Comment findById(int commentId);
 
+    List<Comment> findByVacationId(int vacationId);
+
     Comment add(Comment comment);
 
     boolean update(Comment comment);

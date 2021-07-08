@@ -65,8 +65,8 @@ function Profile() {
         {vacations ? 
             <div>
             {vacations.map(v =>
-                <div key={v.vacationId} className="container mb-3 alt-colors">
-                    <div className="title">{v.description}</div>
+                <div key={v.vacationId} className="container mb-3 py-1 alt-colors">
+                    <Link to={`/vacation/${v.vacationId}`} className="title hidden-link">{v.description}</Link>
                     <div>Users:</div>
                     {v.users.map(u => 
                         <li key={u.identifier} className="container no-bullets">
@@ -82,10 +82,12 @@ function Profile() {
                             <div className="row">
                                 <div className="col-2">{l.location.description}</div>
                                 <div className="col">{l.startDate}  -  {l.endDate}</div>
+                                <Link to={`/vacationstop/delete/${v.vacationId}/${l.location.locationId}`} className={`btn btn-danger me-2`}>Delete Stop</Link>
                             </div>
                         </li>)}
-                        <Link to={`/vacation/delete/${v.vacationId}`} className={`btn btn-danger me-2${(username ? "" : " disabled")}`}>Delete</Link>
-                        <Link to={`/vacation/edit/${v.vacationId}`} className={`btn btn-info${(username ? "" : " disabled")}`}>Edit</Link>
+                        <Link to={`/vacation/delete/${v.vacationId}`} className={`btn btn-danger me-2${(username ? "" : " disabled")}`}>Delete Vacation</Link>
+                        <Link to={`/vacation/edit/${v.vacationId}`} className={`btn btn-info${(username ? "" : " disabled")}`}>Edit Vacation</Link>
+                        <Link to={"/vacationstop/add"} className={`btn btn-warning me-2${(username ? "" : " disabled")}`}>Add Stop</Link>
                 </div>)} 
             </div> 
             : <div>No Vacations found</div>}

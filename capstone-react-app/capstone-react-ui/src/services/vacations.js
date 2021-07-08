@@ -1,10 +1,13 @@
 const url = "http://localhost:8080/api/vacation";
 
+
+
 export async function findAllVacations() {
     const response = await fetch(url);
     if (response.status === 200) {
         return await response.json();
     }
+    
     return Promise.reject("not 200 OK");
 }
 
@@ -15,7 +18,6 @@ export async function findVacationsByUser(userId) {
     }
     return Promise.reject("not 200 OK");
 }
-
 
 export async function findById(vacationId) {
     const response = await fetch(`${url}/vid/${vacationId}`);
@@ -65,8 +67,8 @@ export async function update(vacation) {
         },
         body: JSON.stringify(vacation)
     }
-    const response = await fetch(`${url}/${vacation.id}`, init);
-    if (response.status !== 204) {
+    const response = await fetch(`${url}/${vacation.vacationId}`, init);
+    if (response.status !== 201) {
         const errors = await response.json();
         return Promise.reject(errors);
     }

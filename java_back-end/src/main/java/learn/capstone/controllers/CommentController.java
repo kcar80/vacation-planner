@@ -25,9 +25,14 @@ public class CommentController {
         return service.findAll();
     }
 
-    @GetMapping("/{commentId}")
+    @GetMapping("/cid/{commentId}")
     public Comment findById(@PathVariable int commentId) {
         return service.findById(commentId);
+    }
+
+    @GetMapping("/vid/{vacationId}")
+    public List<Comment> findByVacationId(@PathVariable int vacationId) {
+        return service.findByVacationId(vacationId);
     }
 
     @PostMapping

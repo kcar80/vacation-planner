@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 import { findById, deleteById } from "../../services/vacations";
+import {deleteVacationStopById} from "../../services/vacationstop";
 
 function VacationConfirmDelete() {
 
-    const [vacation, setVacation] = useState({ description: "" });
+    const [vacationstop, setVacationStop] = useState({ startDate: "" });
+    const [vacation, setVacation] = useState({description :""})
     const history = useHistory();
     const { id } = useParams();
 
