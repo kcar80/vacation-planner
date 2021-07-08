@@ -59,7 +59,7 @@ function VacationForm(){
         if(vacation.vacationId > 0){
             update(vacation)
             .then(() => history.push("/profile"))
-            .catch();}
+            .catch(console.error);}
         else if(vacation.vacationId == 0){
             add(vacation)
             .then(v=>{
@@ -70,7 +70,7 @@ function VacationForm(){
                 vacationId: v.vacationId,
                  user: user, identifier: `${v.vacationId} ${user.userId}`}))
             .then(() => history.push("/profile"))
-            .catch();}
+            .catch(console.error);}
     };
 
     // const onSubmit = evt => {
