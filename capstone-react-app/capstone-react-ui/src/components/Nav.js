@@ -28,7 +28,7 @@ function Nav(){
           </div>
       </div>
       <div>
-        {username ? <p>Welcome {username} to Trip Advisory Plus!</p> : <p>Welcome to Trip Advisory Plus!</p>}
+        {username ? <p>Welcome {username} to Trip Advisor Plus!</p> : <p>Welcome to Trip Advisor Plus!</p>}
       </div>
     </div>);
 
