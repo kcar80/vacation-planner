@@ -14,19 +14,19 @@ function StopForm(){
 
     const[vacationStop, setVacationStop] =useState(emptyVacationStop);
     const[vacation, setVacation]=useState(emptyVacation);
-    const[description, setDescription]=useState([""]);
+    const[description, setDescription]=useState("");
     const[location, setLocation] = useState(emptyLocation);
     const history = useHistory();
-    const { id } = useParams();
+    const { vacationId } = useParams();
 
 
     useEffect(() => {
-        if (id) {
-            findById(id)
+        if (vacationId) {
+            findById(vacationId)
                 .then(v => setVacation(v))
                 .catch(() => history.push("/failure"));
         }
-    }, [history, id]);
+    }, [history, vacationId]);
 
 
 
@@ -37,13 +37,10 @@ function StopForm(){
     };
 
     const onChangeLocation = evt => {
-        const nextLocation = { ...location };
-            nextLocation[evt.target.name] = evt.target.value;
-        setLocation(nextLocation);
-
-        findByDescription(location.description)
+        setDescription(evt.target.value);
+        findByDescription(evt.target.value)
                 .then(l => setLocation(l))
-                .catch();
+                .catch(console.error);
 
     };
 
@@ -51,14 +48,18 @@ function StopForm(){
 
 
     const onSubmit = evt => {
+        evt.preventDefault();
         
+    
          addVacationStop({
                 vacationId: vacation.vacationId,
                  startDate : vacationStop.startDate,
                  endDate : vacationStop.endDate,
-                  identifier: `${vacation.vacationId} ${location.locationId}`})
+                  identifier: `${vacation.vacationId} ${location.locationId}`,
+                location: location})
             .then(() => history.push("/profile"))
-            .catch()};
+            .catch(console.error)};
+
     
 
 const cancel = evt => {
@@ -74,8 +75,8 @@ return(
 
 <div className="form-group">
     <label htmlFor="description">Location</label>
-    <input type="text" className="form-control" placeholder="City Name, State abr   ex:  Dallas, TX" id="description" name="description"
-        value={location.description} onChange={onChangeLocation} required />
+    <input type="text" className="form-control" placeholder="City Name, State Abr.   ex:  Dallas, TX" id="description" name="description"
+        value={description} onChange={onChangeLocation} required />
 </div>
 
 

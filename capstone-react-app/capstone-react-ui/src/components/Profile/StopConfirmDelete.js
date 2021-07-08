@@ -1,25 +1,39 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
-import { findById, deleteById } from "../../services/vacations";
+import { findById} from "../../services/vacations";
 import {deleteVacationStopById} from "../../services/vacationstop";
+import { emptyVacation } from "../../services/data";
+import {findByLocationId} from "../../services/locations"
+import {emptyLocation} from "../../services/data";
 
 function VacationConfirmDelete() {
 
-    const [vacationstop, setVacationStop] = useState({ startDate: "" });
-    const [vacation, setVacation] = useState({description :""})
+ 
+    const [vacation, setVacation] = useState(emptyVacation)
+    const[location, setLocation] = useState(emptyLocation);
     const history = useHistory();
-    const { id } = useParams();
+    const { vacationId, locationId } = useParams();
+
 
     useEffect(() => {
-        if (id) {
-            findById(id)
+        if (vacationId) {
+            findById(vacationId)
                 .then(v => setVacation(v))
                 .catch(() => history.push("/failure"));
         }
-    }, [history, id]);
+
+        if(locationId){
+            findByLocationId(locationId)
+                .then(l=> setLocation(l))
+                .catch(() => history.push("/failure"));
+            }
+        
+
+
+    }, [history, vacationId, locationId]);
 
     const yesDelete = () => {
-        deleteById(vacation.vacationId)
+        deleteVacationStopById(vacation.vacationId, location.locationId)
             .then(() => history.push("/profile"))
             .catch(() => history.push("/failure"));
     };
@@ -31,10 +45,10 @@ function VacationConfirmDelete() {
 
     return (
         <div>
-            <h2>Delete {vacation.description}?</h2>
+            <h2>Delete stop for {location.description}?</h2>
             <div className="alert alert-danger">
                 <p>
-                    All data for {vacation.description} will be permanently deleted.
+                    All data for {location.description} will be permanently deleted.
                 </p>
                 Are you sure?
             </div>

@@ -33,14 +33,14 @@ export async function updateVacationStop(vacationstop) {
     }
 }
 
-export async function deleteVacationStopById(vacationstop, jwt) {
+export async function deleteVacationStopById(vacationId, locationId, jwt) {
     const init = {
         method: "DELETE",
         headers: {
             "Authorization": `Bearer ${jwt}`
         }
     }
-    const response = await fetch(`${url}/${vacationstop.vacationId}/${vacationstop.location.locationId}`, init);
+    const response = await fetch(`${url}/${vacationId}/${locationId}`, init);
     if (response.status !== 204) {
         return Promise.reject("not 204 No Content");
     }

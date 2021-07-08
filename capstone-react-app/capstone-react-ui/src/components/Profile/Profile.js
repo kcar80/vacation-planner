@@ -82,12 +82,12 @@ function Profile() {
                             <div className="row">
                                 <div className="col-2">{l.location.description}</div>
                                 <div className="col">{l.startDate}  -  {l.endDate}</div>
-                                <Link to={`/vacationstop/delete/${v.vacationId}/${l.location.locationId}`} className={`btn btn-danger me-2`}>Delete Stop</Link>
+                                <Link to={`/vacation/${v.vacationId}/location/${l.location.locationId}/delete`} className={`btn btn-success btn  me-2`}>Delete Stop</Link>
                             </div>
                         </li>)}
                         <Link to={`/vacation/delete/${v.vacationId}`} className={`btn btn-danger me-2${(username ? "" : " disabled")}`}>Delete Vacation</Link>
                         <Link to={`/vacation/edit/${v.vacationId}`} className={`btn btn-info${(username ? "" : " disabled")}`}>Edit Vacation</Link>
-                        <Link to={"/vacationstop/add"} className={`btn btn-warning me-2${(username ? "" : " disabled")}`}>Add Stop</Link>
+                        <Link to={`/vacation/${v.vacationId}/location/add`} className={`btn btn-warning m-2${(username ? "" : " disabled")}`}>Add Stop</Link>
                 </div>)} 
             </div> 
             : <div>No Vacations found</div>}

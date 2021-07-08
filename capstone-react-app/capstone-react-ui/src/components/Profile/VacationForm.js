@@ -14,8 +14,6 @@ function VacationForm(){
     const[vacation, setVacation] = useState(emptyVacation);
     const [user, setUser] = useState(emptyUser);
     const [location, setLocation] = useState(emptyLocation);
-    const[vacationStop, setVacationStop] =useState(emptyVacationStop);
-    const[vacationUser, setVacationUSer] =useState(emptyVacationUser);
     const {username} = useContext(LoginContext);
     const history = useHistory();
     const { id } = useParams();
@@ -40,19 +38,6 @@ function VacationForm(){
         setVacation(nextVacation);
     };
 
-    // const onSubmit = evt => {
-    //     evt.preventDefault();
-    //     (vacation.vacationId > 0 ? update(vacation) : add(vacation))
-    //         .then(v=>{
-    //             setVacation(v);
-    //                 return v;
-    //             })
-    //         .then( v=> addVacationUser({
-    //             vacationId: v.vacationId,
-    //              user: user, identifier: `${v.vacationId} ${user.userId}`}))
-    //         .then(() => history.push("/profile"))
-    //         .catch();
-    // };
 
     const onSubmit = evt => {
         evt.preventDefault();
@@ -73,13 +58,7 @@ function VacationForm(){
             .catch(console.error);}
     };
 
-    // const onSubmit = evt => {
-    //     evt.preventDefault();
 
-    //     register({ username: user.username, password: user.password })
-    //         .then(() => add(user)
-    //         .then(() => history.push("/login")))
-        
 
     const cancel = evt => {
         evt.preventDefault();

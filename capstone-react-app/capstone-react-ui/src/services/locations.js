@@ -16,6 +16,14 @@ export async function findById(locationId) {
     return Promise.reject("not 200 OK");
 }
 
+export async function findByLocationId(locationId) {
+    const response = await fetch(`${url}/id/${locationId}`);
+    if (response.status === 200) {
+        return await response.json();
+    }
+    return Promise.reject("not 200 OK");
+}
+
 export async function findByDescription(description) {
     const response = await fetch(`${url}/description/${description}`);
     if (response.status === 200) {

@@ -70,13 +70,13 @@ function App() {
           <Route path="/vacation/delete/:id">
           {credentials && credentials.username ? <VacationConfirmDelete />  : <Redirect to="/login" />}
           </Route>
-
-          <Route path={["/vacationstop/edit/:id/:id", "/vacationstop/add"]}>
+          <Route path="/vacation/:vacationId/location/:locationId/delete">
+             {credentials && credentials.username ? <StopConfirmDelete />  : <Redirect to="/login" />}
+           </Route>
+          <Route path={["/vacation/:vacationId/location/:locationId", "/vacation/:vacationId/location/add"]}>
           {credentials && credentials.username ? <StopForm />  : <Redirect to="/login" />}
           </Route>
-          <Route path="/vacationstop/delete/:id/:id">
-          {credentials && credentials.username ? <StopConfirmDelete />  : <Redirect to="/login" />}
-          </Route>
+          
 
           <Route path="/profile">
           {credentials && credentials.username ? <Profile/> : <Redirect to="/login" />}
