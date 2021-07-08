@@ -20,10 +20,10 @@ function Nav(){
       <div className="row align-items-center">
           <Link to="/" className="col pageheader">Trip Advisory Plus</Link>
           <div className="col d-flex justify-content-end">
-            {username ? <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
-              : <Link to="/login" className="btn btn-light">Login</Link>}
-            {username ? <Link to="/profile" className="btn btn-primary">Profile</Link> : 
-              <Link to="/register" className="btn btn-primary">Register</Link>}
+            {username ? <button className="btn btn-primary me-2" onClick={handleLogout}>Logout</button>
+              : <Link to="/login" className="btn btn-light me-2">Login</Link>}
+            {username ? <Link to="/profile" className="btn btn-primary me-2">Profile</Link> : 
+              <Link to="/register" className="btn btn-primary me-2">Register</Link>}
             {username==="admin" ? <Link to="/admintools" className="btn btn-primary">Admin</Link> : <div></div>}
           </div>
       </div>
