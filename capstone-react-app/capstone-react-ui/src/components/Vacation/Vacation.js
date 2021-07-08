@@ -12,6 +12,7 @@ function Vacation() {
     const [vacation, setVacation] = useState(emptyVacation);
     const history = useHistory();
     const { id } = useParams();
+    
     useEffect(() => {
         findById(id)
             .then(setVacation)
