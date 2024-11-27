@@ -10,15 +10,20 @@ import { emptyVacation } from "../../services/data";
 import {addVacationStop} from "../../services/vacationstop";
 import { findByDescription } from "../../services/locations";
 
+
+
 function StopForm(){
 
     const[vacationStop, setVacationStop] =useState(emptyVacationStop);
     const[vacation, setVacation]=useState(emptyVacation);
     const[description, setDescription]=useState("");
     const[location, setLocation] = useState(emptyLocation);
+   
     const history = useHistory();
     const { vacationId } = useParams();
 
+
+  
 
     useEffect(() => {
         if (vacationId) {
@@ -58,7 +63,7 @@ function StopForm(){
                   identifier: `${vacation.vacationId} ${location.locationId}`,
                 location: location})
             .then(() => history.push("/profile"))
-            .catch(console.error)};
+            .catch()};
 
     
 
@@ -73,11 +78,12 @@ return(
     <form onSubmit={onSubmit}>
             <h2>{`Add a Vacation Stop`}</h2>
 
-<div className="form-group">
+ <div className="form-group">
     <label htmlFor="description">Location</label>
     <input type="text" className="form-control" placeholder="City Name, State Abr.   ex:  Dallas, TX" id="description" name="description"
         value={description} onChange={onChangeLocation} required />
-</div>
+</div> 
+
 
 
 <div className="form-group">
