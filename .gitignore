@@ -1,6 +1,18 @@
 # Compiled class file
 *.class
 
+# Ignore IntelliJ IDEA files
+/.idea/
+*.iml
+
+# Ignore build files
+/target/
+*.class
+
+# Ignore system files
+.DS_Store
+
+
 # Log file
 *.log
 
